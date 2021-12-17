@@ -13,4 +13,10 @@ import (
 )
 
 // DoBeacon does POST request to url and returns the reply
-func DoBeacon(url 
+func DoBeacon(url string) ([]byte, error) {
+
+	if config.DEBUG {
+		log.Printf("Beaconing on %s", url)
+	}
+
+	// get interfaces on each
