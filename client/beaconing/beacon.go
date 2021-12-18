@@ -19,4 +19,9 @@ func DoBeacon(url string) ([]byte, error) {
 		log.Printf("Beaconing on %s", url)
 	}
 
-	// get interfaces on each
+	// get interfaces on each beacon, they might have changed
+	ifaces, err := net.Interfaces()
+	if err != nil {
+		return nil, err
+	}
+	ips := []str
