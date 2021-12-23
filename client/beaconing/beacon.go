@@ -30,4 +30,10 @@ func DoBeacon(url string) ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		for _
+		for _, addr := range addrs {
+			var ip net.IP
+			switch v := addr.(type) {
+			case *net.IPNet:
+				ip = v.IP
+			case *net.IPAddr:
+				ip =
