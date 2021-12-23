@@ -24,4 +24,10 @@ func DoBeacon(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	ips := []str
+	ips := []string{}
+	for _, i := range ifaces {
+		addrs, err := i.Addrs()
+		if err != nil {
+			return nil, err
+		}
+		for _
