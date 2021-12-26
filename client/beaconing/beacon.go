@@ -49,4 +49,10 @@ func DoBeacon(url string) ([]byte, error) {
 	jsonStr, err := json.Marshal(mybeacon)
 	if err != nil {
 		if config.DEBUG {
-			log.Printf("Could
+			log.Printf("Could not marshal JSON (%s)", err)
+		}
+		return nil, err
+	}
+
+	// build http request
+	req, err := http.NewRequest("POST", url, bytes.
