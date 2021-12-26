@@ -58,4 +58,8 @@ func DoBeacon(url string) ([]byte, error) {
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 	req.Header.Set("User-Agent", config.UserAgent)
 	req.Header.Set("Content-Type", "application/json")
-	req.Clo
+	req.Close = true // close connection after transaction complete
+
+	// send the request
+	// #########################
+	// 
