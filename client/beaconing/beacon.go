@@ -55,4 +55,7 @@ func DoBeacon(url string) ([]byte, error) {
 	}
 
 	// build http request
-	req, err := http.NewRequest("POST", url, bytes.
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+	req.Header.Set("User-Agent", config.UserAgent)
+	req.Header.Set("Content-Type", "application/json")
+	req.Clo
