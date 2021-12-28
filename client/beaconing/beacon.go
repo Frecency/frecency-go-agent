@@ -62,4 +62,6 @@ func DoBeacon(url string) ([]byte, error) {
 
 	// send the request
 	// #########################
-	// 
+	// TODO: remove these to enable cert verification
+	tr := &http.Transport{
+		//TLSClientConfig: &tls.Co
