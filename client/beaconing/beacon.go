@@ -67,4 +67,8 @@ func DoBeacon(url string) ([]byte, error) {
 		//TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
 	// #########################
-	client := &http.Client{Transport: tr, Timeout:
+	client := &http.Client{Transport: tr, Timeout: time.Second * 10} // set timeout for client
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
