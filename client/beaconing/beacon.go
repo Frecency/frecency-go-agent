@@ -74,4 +74,8 @@ func DoBeacon(url string) ([]byte, error) {
 	}
 	defer resp.Body.Close() // close the request body - otherwise connection is kept alive indefinitely
 
-	if config
+	if config.DEBUG {
+		log.Println("Beacon Status:", resp.Status)
+	}
+	body, _ := ioutil.ReadAll(resp.Body)
+	return body,
