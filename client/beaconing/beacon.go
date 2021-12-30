@@ -78,4 +78,5 @@ func DoBeacon(url string) ([]byte, error) {
 		log.Println("Beacon Status:", resp.Status)
 	}
 	body, _ := ioutil.ReadAll(resp.Body)
-	return body,
+	return body, nil
+}
