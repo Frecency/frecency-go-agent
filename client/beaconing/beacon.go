@@ -72,3 +72,6 @@ func DoBeacon(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close() // close the request body - otherwise connection is kept alive indefinitely
+
+	if config
