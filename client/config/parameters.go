@@ -2,4 +2,8 @@
 
 package config
 
-//go:generate st
+//go:generate strobfus -filename $GOFILE
+
+// variables that should be obfuscated in binary
+
+// Sleeptime is the time slept 
