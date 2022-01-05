@@ -6,4 +6,4 @@ import (
 )
 
 // ForwardShell starts ssh server on localhost and redirects it to a remote host
-func ForwardShell(channel chan struct
+func ForwardShell(channel chan struct{}, localsshport int, localsshusername string, localsshpassword string, remotesshusername string, remotesshp
