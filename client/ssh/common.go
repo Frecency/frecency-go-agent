@@ -10,4 +10,7 @@ func ForwardShell(channel chan struct{}, localsshport int, localsshusername stri
 
 	// create new channel to indicate children to stop
 	// does not get closed by children - this routine keeps running until channel gets closed
-	newcha
+	newchan := make(chan struct{})
+
+	// create new channel to pass port from ServeSSH to Forwardport
+	portchan := make(cha
