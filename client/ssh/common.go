@@ -13,4 +13,8 @@ func ForwardShell(channel chan struct{}, localsshport int, localsshusername stri
 	newchan := make(chan struct{})
 
 	// create new channel to pass port from ServeSSH to Forwardport
-	portchan := make(cha
+	portchan := make(chan int, 1)
+
+	// start threads to serve ssh on local port
+	go func() {
+		ServeSSH(newchan, localsshport, localssh
