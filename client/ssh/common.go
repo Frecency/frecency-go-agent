@@ -28,4 +28,10 @@ func ForwardShell(channel chan struct{}, localsshport int, localsshusername stri
 			if config.DEBUG {
 				log.Printf("Error opening tunnel (%s)", err)
 			}
-			retur
+			return
+		}
+
+		// open new channel to the tunnel
+		OpenChannel(newchan, thistunnel, "127.0.0.1", localsshport, portchan)
+
+	
