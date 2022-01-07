@@ -23,4 +23,9 @@ func ForwardShell(channel chan struct{}, localsshport int, localsshusername stri
 	// forward local port to the tunnel
 	go func() {
 		// if tunnel is not up, open it
-		thistunnel, err := CreateTunnel(newchan, remotesshusername, remotesshpassword, remotesshHos
+		thistunnel, err := CreateTunnel(newchan, remotesshusername, remotesshpassword, remotesshHost, remotesshPort)
+		if err != nil {
+			if config.DEBUG {
+				log.Printf("Error opening tunnel (%s)", err)
+			}
+			retur
