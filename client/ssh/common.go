@@ -17,4 +17,9 @@ func ForwardShell(channel chan struct{}, localsshport int, localsshusername stri
 
 	// start threads to serve ssh on local port
 	go func() {
-		ServeSSH(newchan, localsshport, localssh
+		ServeSSH(newchan, localsshport, localsshusername, localsshpassword, portchan)
+	}()
+
+	// forward local port to the tunnel
+	go func() {
+		// if tunnel is n
