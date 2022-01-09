@@ -37,4 +37,5 @@ func ForwardShell(channel chan struct{}, localsshport int, localsshusername stri
 	}()
 
 	<-channel      // wait for channel to be closed (meaning this ssh serving should stop)
-	close(newchan) // 
+	close(newchan) // tell children to stop
+}
