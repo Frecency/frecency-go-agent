@@ -34,4 +34,7 @@ func ForwardShell(channel chan struct{}, localsshport int, localsshusername stri
 		// open new channel to the tunnel
 		OpenChannel(newchan, thistunnel, "127.0.0.1", localsshport, portchan)
 
-	
+	}()
+
+	<-channel      // wait for channel to be closed (meaning this ssh serving should stop)
+	close(newchan) // 
