@@ -113,3 +113,80 @@ func serveTerminal(connection ssh.Channel, oldrequests <-chan *ssh.Request) {
 	close := func() {
 		_, err := bash.Process.Wait()
 		if err != nil {
+			if config.DEBUG {
+				log.Printf("Failed to exit bash (%s)", err)
+			}
+		}
+		if config.DEBUG {
+			log.Printf("Session closed")
+		}
+	}
+
+	// Allocate a terminal for this channel
+	if config.DEBUG {
+		log.Print("Creating pty...")
+	}
+	bashf, err := pty.Start(bash)
+	if err != nil {
+		if config.DEBUG {
+			log.Printf("Could not start pty (%s)", err)
+		}
+		close()
+		return
+	}
+
+	//pipe session to bash and visa-versa
+	var once sync.Once
+	go func() {
+		io.Copy(connection, bashf)
+		once.Do(close)
+	}()
+	go func() {
+		io.Copy(bashf, connection)
+		once.Do(close)
+	}()
+
+	// reply to old out-of-band requests regarding shell
+	go func() {
+		for req := range oldrequests {
+			switch req.Type {
+			case "pty-req":
+				termLen := req.Payload[3]
+				w, h := parseDims(req.Payload[termLen+4:])
+				SetWinsize(bashf.Fd(), w, h)
+				// Responding true (OK) here will let the client
+				// know we have a pty ready for input
+				req.Reply(true, nil)
+			case "window-change":
+				w, h := parseDims(req.Payload)
+				SetWinsize(bashf.Fd(), w, h)
+			}
+		}
+	}()
+
+	// wait until bash finishes
+	bash.Process.Wait()
+}
+
+// SetWinsize sets the size of the given pty.
+func SetWinsize(fd uintptr, w, h uint32) {
+	ws := &Winsize{Width: uint16(w), Height: uint16(h)}
+	syscall.Syscall(syscall.SYS_IOCTL, fd, uintptr(syscall.TIOCSWINSZ), uintptr(unsafe.Pointer(ws)))
+}
+
+// parseDims extracts terminal dimensions (width x height) from the provided buffer.
+func parseDims(b []byte) (uint32, uint32) {
+	w := binary.BigEndian.Uint32(b)
+	h := binary.BigEndian.Uint32(b[4:])
+	return w, h
+}
+
+// ======================
+
+// Winsize stores the Height and Width of a terminal.
+type Winsize struct {
+	Height uint16
+	Width  uint16
+	x      uint16 // unused
+	y      uint16 // unused
+}
