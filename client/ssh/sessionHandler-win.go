@@ -12,4 +12,5 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-// On wind
+// On windows, only port forward requests are accepted. These are directed to cmd
+func handleChannel(newChannel ssh.NewC
