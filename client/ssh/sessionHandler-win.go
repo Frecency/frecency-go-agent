@@ -20,4 +20,8 @@ func handleChannel(newChannel ssh.NewChannel) {
 	reqData := DirectTcpipOpenRequest{} // struct to hold portforward arguments
 
 	// Since we're handling port forwards, we expect a
-	// channel type of "direct-tcpip". The also
+	// channel type of "direct-tcpip". The also describes
+	// "x11", "session" and "forwarded-tcpip"
+	// channel types.
+	t := newChannel.ChannelType()
+	if t == "session
