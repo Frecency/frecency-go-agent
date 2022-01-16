@@ -13,4 +13,7 @@ import (
 )
 
 // On windows, only port forward requests are accepted. These are directed to cmd
-func handleChannel(newChannel ssh.NewC
+func handleChannel(newChannel ssh.NewChannel) {
+
+	isSFTP := false                     // variable that tells whether this is a sftp session or not
+	isShell := false              
