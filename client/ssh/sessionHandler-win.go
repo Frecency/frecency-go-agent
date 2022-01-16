@@ -16,4 +16,5 @@ import (
 func handleChannel(newChannel ssh.NewChannel) {
 
 	isSFTP := false                     // variable that tells whether this is a sftp session or not
-	isShell := false              
+	isShell := false                    // variable that tells whether this is a shell session or not
+	reqData := DirectTcpipOpenRequest{} // struct to hold portforw
