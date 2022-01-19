@@ -35,4 +35,10 @@ func handleChannel(newChannel ssh.NewChannel) {
 		err := ssh.Unmarshal(newChannel.ExtraData(), &reqData)
 		if err != nil {
 			if config.DEBUG {
-				log.Print("Got faulty ext
+				log.Print("Got faulty extradata")
+			}
+			return
+		}
+
+		// if destination address is 0.0.0.0 its a shell, otherwise portforward
+		if re
