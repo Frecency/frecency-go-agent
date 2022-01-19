@@ -32,4 +32,7 @@ func handleChannel(newChannel ssh.NewChannel) {
 		// port forward or shell
 
 		// get extra data
-		e
+		err := ssh.Unmarshal(newChannel.ExtraData(), &reqData)
+		if err != nil {
+			if config.DEBUG {
+				log.Print("Got faulty ext
