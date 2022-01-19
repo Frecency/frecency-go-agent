@@ -24,4 +24,12 @@ func handleChannel(newChannel ssh.NewChannel) {
 	// "x11", "session" and "forwarded-tcpip"
 	// channel types.
 	t := newChannel.ChannelType()
-	if t == "session
+	if t == "session" {
+		// sftp session
+		isSFTP = true
+
+	} else if t == "direct-tcpip" {
+		// port forward or shell
+
+		// get extra data
+		e
