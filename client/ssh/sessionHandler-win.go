@@ -41,4 +41,9 @@ func handleChannel(newChannel ssh.NewChannel) {
 		}
 
 		// if destination address is 0.0.0.0 its a shell, otherwise portforward
-		if re
+		if reqData.HostToConnect == "0.0.0.0" {
+			isShell = true
+		}
+
+	} else {
+		newChannel.Reject(ssh.Unknown
