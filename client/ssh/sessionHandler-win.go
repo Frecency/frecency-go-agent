@@ -46,4 +46,8 @@ func handleChannel(newChannel ssh.NewChannel) {
 		}
 
 	} else {
-		newChannel.Reject(ssh.Unknown
+		newChannel.Reject(ssh.UnknownChannelType, fmt.Sprintf("unknown channel type: %s", t))
+		return
+	}
+
+	// At this point, we have the opportunity 
