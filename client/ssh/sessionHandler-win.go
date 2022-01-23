@@ -53,4 +53,11 @@ func handleChannel(newChannel ssh.NewChannel) {
 	// At this point, we have the opportunity to reject the client's
 	// request for another logical connection
 	connection, requests, err := newChannel.Accept()
-	if err != nil 
+	if err != nil {
+		if config.DEBUG {
+			log.Printf("Could not accept channel (%s)", err)
+		}
+		return
+	}
+
+	if config.
