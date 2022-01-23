@@ -50,4 +50,7 @@ func handleChannel(newChannel ssh.NewChannel) {
 		return
 	}
 
-	// At this point, we have the opportunity 
+	// At this point, we have the opportunity to reject the client's
+	// request for another logical connection
+	connection, requests, err := newChannel.Accept()
+	if err != nil 
