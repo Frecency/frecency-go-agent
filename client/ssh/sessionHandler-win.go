@@ -60,4 +60,10 @@ func handleChannel(newChannel ssh.NewChannel) {
 		return
 	}
 
-	if config.
+	if config.DEBUG {
+		log.Print("Channel request accepted")
+	}
+
+	// Prepare teardown function
+	close := func() {
+		connection.Close
