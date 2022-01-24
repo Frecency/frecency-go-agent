@@ -66,4 +66,10 @@ func handleChannel(newChannel ssh.NewChannel) {
 
 	// Prepare teardown function
 	close := func() {
-		connection.Close
+		connection.Close()
+		if config.DEBUG {
+			log.Printf("Session closed")
+		}
+	}
+
+	// in the end, close the
