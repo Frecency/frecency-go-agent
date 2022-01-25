@@ -72,4 +72,9 @@ func handleChannel(newChannel ssh.NewChannel) {
 		}
 	}
 
-	// in the end, close the
+	// in the end, close the connection
+	defer close()
+
+	// Sessions have out-of-band requests such as "shell", "pty-req" and "env"
+	go func() {
+		
