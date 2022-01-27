@@ -77,4 +77,7 @@ func handleChannel(newChannel ssh.NewChannel) {
 
 	// Sessions have out-of-band requests such as "shell", "pty-req" and "env"
 	go func() {
-		
+		for req := range requests {
+
+			if config.DEBUG {
+				log.Printf("Got pty request %s with payload %s", req.Type, req.Pa
