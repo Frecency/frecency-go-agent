@@ -101,4 +101,11 @@ func handleChannel(newChannel ssh.NewChannel) {
 	} else if isShell {
 
 		if config.DEBUG {
-			log.Print("Handling shell client now
+			log.Print("Handling shell client now")
+		}
+
+		serveTerminal(connection) // serve shell session
+	} else {
+
+		if config.DEBUG {
+			log.Print("Handling port forward now
