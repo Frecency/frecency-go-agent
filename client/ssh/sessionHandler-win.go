@@ -80,4 +80,14 @@ func handleChannel(newChannel ssh.NewChannel) {
 		for req := range requests {
 
 			if config.DEBUG {
-				log.Printf("Got pty request %s with payload %s", req.Type, req.Pa
+				log.Printf("Got pty request %s with payload %s", req.Type, req.Payload)
+			}
+
+			if req.WantReply {
+				req.Reply(true, nil)
+			}
+		}
+	}()
+
+	// if this is SFTP session, handle it
+	if 
