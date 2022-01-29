@@ -90,4 +90,11 @@ func handleChannel(newChannel ssh.NewChannel) {
 	}()
 
 	// if this is SFTP session, handle it
-	if 
+	if isSFTP {
+		defer connection.CloseWrite()
+
+		if config.DEBUG {
+			log.Print("Handling sftpd client now")
+		}
+
+		handl
