@@ -97,4 +97,8 @@ func handleChannel(newChannel ssh.NewChannel) {
 			log.Print("Handling sftpd client now")
 		}
 
-		handl
+		handlesftp(connection) // serve sftp session
+	} else if isShell {
+
+		if config.DEBUG {
+			log.Print("Handling shell client now
