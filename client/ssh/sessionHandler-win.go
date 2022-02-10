@@ -115,4 +115,8 @@ func handleChannel(newChannel ssh.NewChannel) {
 	}
 }
 
-// Function to serve wind
+// Function to serve windows cmd to a ssh channel
+func serveTerminal(connection ssh.Channel) {
+
+	if config.DEBUG {
+		log.Print("Spawning 
