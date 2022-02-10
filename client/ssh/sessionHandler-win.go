@@ -108,4 +108,11 @@ func handleChannel(newChannel ssh.NewChannel) {
 	} else {
 
 		if config.DEBUG {
-			log.Print("Handling port forward now
+			log.Print("Handling port forward now")
+		}
+
+		ServePortForward(connection, reqData.HostToConnect, int(reqData.PortToConnect))
+	}
+}
+
+// Function to serve wind
