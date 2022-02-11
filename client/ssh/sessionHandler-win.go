@@ -119,4 +119,9 @@ func handleChannel(newChannel ssh.NewChannel) {
 func serveTerminal(connection ssh.Channel) {
 
 	if config.DEBUG {
-		log.Print("Spawning 
+		log.Print("Spawning shell now")
+	}
+
+	// run cmd on background and connect session to it
+	cmd := exec.Command("cmd")
+	cmd.Sy
