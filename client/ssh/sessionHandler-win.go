@@ -127,4 +127,11 @@ func serveTerminal(connection ssh.Channel) {
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 
 	// stdin doesnt seem to get written to the shell...
-	cmd.Stdin =
+	cmd.Stdin = connection
+	cmd.Stdout = connection
+	cmd.Stderr = connection
+
+	cmd.Run()
+
+	if config.DEBUG {
+		log.Printf("Cmd exited. c
