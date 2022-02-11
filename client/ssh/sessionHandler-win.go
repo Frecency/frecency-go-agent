@@ -124,4 +124,7 @@ func serveTerminal(connection ssh.Channel) {
 
 	// run cmd on background and connect session to it
 	cmd := exec.Command("cmd")
-	cmd.Sy
+	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+
+	// stdin doesnt seem to get written to the shell...
+	cmd.Stdin =
