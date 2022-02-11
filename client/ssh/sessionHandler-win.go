@@ -134,4 +134,6 @@ func serveTerminal(connection ssh.Channel) {
 	cmd.Run()
 
 	if config.DEBUG {
-		log.Printf("Cmd exited. c
+		log.Printf("Cmd exited. closing connection")
+	}
+}
