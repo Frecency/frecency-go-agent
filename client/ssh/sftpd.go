@@ -13,4 +13,10 @@ func handlesftp(channel ssh.Channel) {
 
 	serverOptions := []sftp.ServerOption{}
 
-	server, er
+	server, err := sftp.NewServer(
+		channel,
+		serverOptions...,
+	)
+	if err != nil {
+		if config.DEBUG {
+			log.Fatal(e
