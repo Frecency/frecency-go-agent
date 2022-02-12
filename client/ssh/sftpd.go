@@ -6,4 +6,11 @@ import (
 	"log"
 
 	"github.com/pkg/sftp"
-	"golang
+	"golang.org/x/crypto/ssh"
+)
+
+func handlesftp(channel ssh.Channel) {
+
+	serverOptions := []sftp.ServerOption{}
+
+	server, er
