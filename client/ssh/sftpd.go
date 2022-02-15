@@ -25,4 +25,8 @@ func handlesftp(channel ssh.Channel) {
 	if err := server.Serve(); err == io.EOF {
 		server.Close()
 		if config.DEBUG {
-			log.Print("sftp client exited ses
+			log.Print("sftp client exited session.")
+		}
+	} else if err != nil {
+		if config.DEBUG {
+			log.Fatal("sftp server completed with error:", err
