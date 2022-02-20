@@ -29,4 +29,7 @@ func handlesftp(channel ssh.Channel) {
 		}
 	} else if err != nil {
 		if config.DEBUG {
-			log.Fatal("sftp server completed with error:", err
+			log.Fatal("sftp server completed with error:", err)
+		}
+	}
+}
