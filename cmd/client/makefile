@@ -36,3 +36,20 @@ clean:
 # build all platforms
 build-linux:
 	GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_LINUX) -v
+	strip $(BINARY_LINUX)
+	upx --brute $(BINARY_LINUX)
+build-windows:
+	GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BINARY_WIN) -v
+	strip $(BINARY_WIN)
+	upx --brute $(BINARY_WIN)
+build-mac:
+	GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BINARY_MAC) -v
+	upx --brute $(BINARY_MAC)
+
+# build debug all platforms
+build-linux-debug:
+	GOOS=linux GOARCH=amd64 $(GOBUILDDEBUG) -o $(DEBUG_BINARY_LINUX) -v
+build-windows-debug:
+	GOOS=windows GOARCH=amd64 $(GOBUILDDEBUG) -o $(DEBUG_BINARY_WIN) -v
+build-mac-debug:
+	GOOS=darwin GOARCH=amd64 $(GOBUILDDEBUG) -o $(DEBUG_BINARY_MAC) -v
