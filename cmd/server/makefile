@@ -1,2 +1,6 @@
 # Go parameters
-GOC
+GOCMD=go
+SHRINKFLAGS=-ldflags="-s -w"
+DEBUGTAGS=-tags DEBUG
+GOBUILD=$(GOCMD) build $(SHRINKFLAGS)
+GOBUILDDE
