@@ -19,4 +19,5 @@ debug:
 	$(GOBUILDDEBUG) -o $(DEBUG_BINARY_NAME) -v
 clean: 
 	$(GOCLEAN)
-	rm -f $(BIN
+	rm -f $(BINARY_NAME)
+	rm -f $(DEBUG_BINARY_NAME)
