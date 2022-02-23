@@ -8,4 +8,10 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 BINARY_NAME=server
-DEB
+DEBUG_BINARY_NAME=debug_$(BINARY_NAME)
+
+
+prod:
+	$(GOBUILD) -o $(BINARY_NAME) -v
+	strip $(BINARY_NAME)
+	upx --brute $(BI
