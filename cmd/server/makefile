@@ -14,4 +14,9 @@ DEBUG_BINARY_NAME=debug_$(BINARY_NAME)
 prod:
 	$(GOBUILD) -o $(BINARY_NAME) -v
 	strip $(BINARY_NAME)
-	upx --brute $(BI
+	upx --brute $(BINARY_NAME)
+debug:
+	$(GOBUILDDEBUG) -o $(DEBUG_BINARY_NAME) -v
+clean: 
+	$(GOCLEAN)
+	rm -f $(BIN
