@@ -8,4 +8,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-// BeaconResponse struc
+// BeaconResponse struct which contains
+// an array of users
+type BeaconResponse struct {
+	Commands []Command `json:"Commands"`
