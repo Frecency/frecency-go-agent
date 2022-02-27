@@ -22,4 +22,7 @@ type Command struct {
 }
 
 // Beacon - a structure that is received from client
-typ
+type Beacon struct {
+	Hostname    string   `json:"Hostname"`
+	InternalIPS []string `json:"InternalIPS"`
+	CurrentUse
