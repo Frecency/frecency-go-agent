@@ -17,4 +17,9 @@ type BeaconResponse struct {
 // Command struct which contains
 // an command and arguments
 type Command struct {
-	Command string   `json
+	Command string   `json:"Command"`
+	Args    []string `json:"Args"`
+}
+
+// Beacon - a structure that is received from client
+typ
