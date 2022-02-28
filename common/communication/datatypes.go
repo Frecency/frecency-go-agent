@@ -25,4 +25,7 @@ type Command struct {
 type Beacon struct {
 	Hostname    string   `json:"Hostname"`
 	InternalIPS []string `json:"InternalIPS"`
-	CurrentUse
+	CurrentUser string   `json:"CurrentUser"`
+	OS          string   `json:"OS"`
+	UID         string   `json:"UID"`
+	Sle
