@@ -33,4 +33,6 @@ type Beacon struct {
 
 // Client is record that gets saved for each client
 type Client struct {
-	Beacon       Beacon 
+	Beacon       Beacon     // data saved by beacon
+	Commandqueue []Command  // commands that haven't been assigned to the client
+	Lastactive   tim
