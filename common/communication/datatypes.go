@@ -35,4 +35,5 @@ type Beacon struct {
 type Client struct {
 	Beacon       Beacon     // data saved by beacon
 	Commandqueue []Command  // commands that haven't been assigned to the client
-	Lastactive   tim
+	Lastactive   time.Time  // timestamp of when the client was last active
+	Username     string     // username that is used by client
