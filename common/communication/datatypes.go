@@ -28,4 +28,9 @@ type Beacon struct {
 	CurrentUser string   `json:"CurrentUser"`
 	OS          string   `json:"OS"`
 	UID         string   `json:"UID"`
-	Sle
+	Sleeptime   int      `json:"Sleeptime"`
+}
+
+// Client is record that gets saved for each client
+type Client struct {
+	Beacon       Beacon 
