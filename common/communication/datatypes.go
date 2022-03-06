@@ -37,4 +37,8 @@ type Client struct {
 	Commandqueue []Command  // commands that haven't been assigned to the client
 	Lastactive   time.Time  // timestamp of when the client was last active
 	Username     string     // username that is used by client to ssh into server and to authenticate to the client's ssh
-	Password     string     // ^ corresp
+	Password     string     // ^ corresponding password
+	Forward      *SSHClient // active port forwards of this client
+}
+
+// CommandName - 
