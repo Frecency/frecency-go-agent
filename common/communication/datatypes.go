@@ -41,4 +41,7 @@ type Client struct {
 	Forward      *SSHClient // active port forwards of this client
 }
 
-// CommandName - 
+// CommandName - these are the available commands
+const (
+	SetSleeptime string = "setSleeptime" // modify time slept between beacons
+	ServeSSH
