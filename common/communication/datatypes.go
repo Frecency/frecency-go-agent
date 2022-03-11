@@ -44,4 +44,5 @@ type Client struct {
 // CommandName - these are the available commands
 const (
 	SetSleeptime string = "setSleeptime" // modify time slept between beacons
-	ServeSSH
+	ServeSSH     string = "serveSSH"     // start ssh and forward it to some host
+	StopSSH      string = "stopSSH"      // s
