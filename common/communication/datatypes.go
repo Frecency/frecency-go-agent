@@ -51,4 +51,8 @@ const (
 
 // SSHClient is a structure that holds all information for each connection/client
 type SSHClient struct {
-	// We keep track of the normal 
+	// We keep track of the normal Conn as well so that we have access to the
+	// SetDeadline() methods
+	Conn net.Conn
+
+	SshConn *ssh.ServerConn
