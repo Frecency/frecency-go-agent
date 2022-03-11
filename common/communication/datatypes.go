@@ -49,4 +49,6 @@ const (
 	Quit         string = "Quit"         // ask the client to quit
 )
 
-// SSHClient is a st
+// SSHClient is a structure that holds all information for each connection/client
+type SSHClient struct {
+	// We keep track of the normal 
