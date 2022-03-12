@@ -60,4 +60,5 @@ type SSHClient struct {
 	// Listener sockets opened by the client
 	Listeners map[string]net.Listener
 
-	// This indicates that a client
+	// This indicates that a client is shutting down. When a client is stopping,
+	// we do not allow new listening requests, to prevent a listene
