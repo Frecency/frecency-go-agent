@@ -56,3 +56,8 @@ type SSHClient struct {
 	Conn net.Conn
 
 	SshConn *ssh.ServerConn
+
+	// Listener sockets opened by the client
+	Listeners map[string]net.Listener
+
+	// This indicates that a client
