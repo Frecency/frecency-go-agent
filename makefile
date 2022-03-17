@@ -5,4 +5,6 @@ GOGET=$(GOCMD) get
 # fetch dependencies
 deps:
 	$(GOGET) github.com/denisbrodbeck/machineid
-	$(GOGET) golan
+	$(GOGET) golang.org/x/sys/windows/registry
+	$(GOGET) github.com/kr/pty
+	$(GOGET) github.com/znly/strobfus
