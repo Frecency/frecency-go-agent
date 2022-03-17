@@ -9,4 +9,8 @@ import (
 	"net/http"
 	"time"
 
-	"git
+	"github.com/fatih/color"
+)
+
+// BeaconHandler handles incoming beacons
+func BeaconHandler(w http.ResponseWriter, r *http.Request
