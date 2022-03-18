@@ -13,4 +13,10 @@ import (
 )
 
 // BeaconHandler handles incoming beacons
-func BeaconHandler(w http.ResponseWriter, r *http.Request
+func BeaconHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodPost:
+
+		// decode the received json
+		decoder := json.NewDecoder(r.Body)
+		var t com
