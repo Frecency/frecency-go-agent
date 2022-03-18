@@ -19,4 +19,9 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 
 		// decode the received json
 		decoder := json.NewDecoder(r.Body)
-		var t com
+		var t communication.Beacon
+		err := decoder.Decode(&t)
+		if err != nil {
+			printError("Error parsing JSON")
+			return404(w)
+			r
