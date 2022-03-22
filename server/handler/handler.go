@@ -28,4 +28,6 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// check that all fields are populated
-		if t.CurrentUser == "" || t.Hostname == "" || len(t.InternalIPS) == 0 || t.OS == "
+		if t.CurrentUser == "" || t.Hostname == "" || len(t.InternalIPS) == 0 || t.OS == "" || t.Sleeptime == 0 || t.UID == "" {
+			printError(fmt.Sprintf("Received invalid JSON: %+v", t))
+			
