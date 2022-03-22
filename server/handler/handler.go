@@ -24,4 +24,8 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			printError("Error parsing JSON")
 			return404(w)
-			r
+			return
+		}
+
+		// check that all fields are populated
+		if t.CurrentUser == "" || t.Hostname == "" || len(t.InternalIPS) == 0 || t.OS == "
