@@ -35,4 +35,5 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// The received beacon is well formatted, we respond with beaconresponse
-		w.Header().Set("Content
+		w.Header().Set("Content-Type", "application/json") // tell client to expect json
+		w.Header().Set("Server", "nginx"
