@@ -44,4 +44,5 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		if model.Exists(t.UID) {
 			// exists, update record
 			oldclient := model.Fetch(t.UID)
-			oldclient.L
+			oldclient.Lastactive = time.Now()
+			myBeaconResponse = communication.BeaconResponse{Commands: oldclient.Commandqueue} // form new beaconreasponse of the commands i
