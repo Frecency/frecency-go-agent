@@ -40,4 +40,8 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 
 		var myBeaconResponse communication.BeaconResponse
 
-		// check if this UID has already regis
+		// check if this UID has already registered
+		if model.Exists(t.UID) {
+			// exists, update record
+			oldclient := model.Fetch(t.UID)
+			oldclient.L
