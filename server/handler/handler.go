@@ -54,3 +54,4 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// client not yet registered
+		newclient := communication.Client{Beacon: t, Commandqueue: nil, Lastactive: time.Now(), Username: "", Pas
