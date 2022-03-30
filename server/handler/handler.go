@@ -48,4 +48,9 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 			myBeaconResponse = communication.BeaconResponse{Commands: oldclient.Commandqueue} // form new beaconreasponse of the commands in queue
 			oldclient.Commandqueue = nil
 			oldclient.Beacon = t
-			model.Store(oldclient.Beacon.UID, oldclient) // store 
+			model.Store(oldclient.Beacon.UID, oldclient) // store the updated client
+			json.NewEncoder(w).Encode(myBeaconResponse)  // serve the request
+			return
+		}
+
+		// client not yet registered
