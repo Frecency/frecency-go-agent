@@ -56,4 +56,4 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		// client not yet registered
 		newclient := communication.Client{Beacon: t, Commandqueue: nil, Lastactive: time.Now(), Username: "", Password: "", Forward: nil} // create new client
 		model.Store(newclient.Beacon.UID, newclient)                                                                                      // store the new client
-		myBeaconResponse = communication.Beacon
+		myBeaconResponse = communication.BeaconResponse{Commands: nil}                                                                    // create Beaconresponse 
