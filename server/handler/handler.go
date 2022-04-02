@@ -56,4 +56,7 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		// client not yet registered
 		newclient := communication.Client{Beacon: t, Commandqueue: nil, Lastactive: time.Now(), Username: "", Password: "", Forward: nil} // create new client
 		model.Store(newclient.Beacon.UID, newclient)                                                                                      // store the new client
-		myBeaconResponse = communication.BeaconResponse{Commands: nil}                                                                    // create Beaconresponse 
+		myBeaconResponse = communication.BeaconResponse{Commands: nil}                                                                    // create Beaconresponse with empty content <- if autorun, it should be here
+
+		// tell user we received new client
+		color.Set(color.FgG
