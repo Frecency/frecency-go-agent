@@ -59,4 +59,8 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		myBeaconResponse = communication.BeaconResponse{Commands: nil}                                                                    // create Beaconresponse with empty content <- if autorun, it should be here
 
 		// tell user we received new client
-		color.Set(color.FgG
+		color.Set(color.FgGreen)
+		log.Printf("New client %s %s@%s (%s)", t.UID, t.CurrentUser, t.Hostname, t.OS)
+		color.Unset()
+
+	
