@@ -63,4 +63,11 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("New client %s %s@%s (%s)", t.UID, t.CurrentUser, t.Hostname, t.OS)
 		color.Unset()
 
-	
+		json.NewEncoder(w).Encode(myBeaconResponse) // serve the request
+	default:
+		// give error like 403 forbidden
+		return404(w)
+	}
+}
+
+// pr
