@@ -70,4 +70,7 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// pr
+// print message in red
+func printError(message string) {
+	color.Set(color.FgRed) // set color for the logging
+	log.Prin
