@@ -73,4 +73,9 @@ func BeaconHandler(w http.ResponseWriter, r *http.Request) {
 // print message in red
 func printError(message string) {
 	color.Set(color.FgRed) // set color for the logging
-	log.Prin
+	log.Printf("%s", message)
+	color.Unset() // Don't forget to unset
+}
+
+// nginx default 404 page
+var defaultnginx40
