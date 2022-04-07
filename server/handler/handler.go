@@ -82,4 +82,10 @@ var defaultnginx404 = `<html>
 <head><title>404 Not Found</title></head>
 <body bgcolor="white">
 <center><h1>404 Not Found</h1></center>
-<hr><center>nginx</cente
+<hr><center>nginx</center>
+</body>
+</html>
+`
+
+// return the nginx default 404 to the client
+func return404(w http.Response
