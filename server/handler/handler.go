@@ -88,4 +88,7 @@ var defaultnginx404 = `<html>
 `
 
 // return the nginx default 404 to the client
-func return404(w http.Response
+func return404(w http.ResponseWriter) {
+	w.Header().Set("Content-Type", "text/html")
+	w.Header().Set("Server", "nginx")  // tell its nginx
+	
