@@ -91,4 +91,8 @@ var defaultnginx404 = `<html>
 func return404(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "text/html")
 	w.Header().Set("Server", "nginx")  // tell its nginx
-	
+	w.WriteHeader(http.StatusNotFound) // 404
+
+	// write default nginx 404 page
+	fmt.Fprintf(w, defaultnginx404)
+}
