@@ -8,4 +8,8 @@ import (
 
 var db *cache.Cache
 
-// InitDB ini
+// InitDB inits the database access
+func InitDB() {
+
+	// Create a cache with no expiration at all, and which
+	// never automatically purg
