@@ -12,4 +12,9 @@ var db *cache.Cache
 func InitDB() {
 
 	// Create a cache with no expiration at all, and which
-	// never automatically purg
+	// never automatically purges expired items
+	db = cache.New(cache.NoExpiration, cache.NoExpiration)
+}
+
+// Exists checks if UID exists
+func Exists(UID stri
