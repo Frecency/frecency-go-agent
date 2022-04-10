@@ -25,4 +25,8 @@ func Exists(UID string) bool {
 // Fetch fetches the client from database. returns nil if not found - panics if not found!
 func Fetch(UID string) communication.Client {
 	client, _ := db.Get(UID)
-	retur
+	return client.(communication.Client)
+}
+
+// Items returns map of all clients
+func Items() map[string]communication.Cl
