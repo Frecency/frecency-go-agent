@@ -17,4 +17,9 @@ func InitDB() {
 }
 
 // Exists checks if UID exists
-func Exists(UID stri
+func Exists(UID string) bool {
+	_, found := db.Get(UID)
+	return found
+}
+
+// Fetch fetches the client from database. retur
