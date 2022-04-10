@@ -29,4 +29,7 @@ func Fetch(UID string) communication.Client {
 }
 
 // Items returns map of all clients
-func Items() map[string]communication.Cl
+func Items() map[string]communication.Client {
+	clientmap := map[string]communication.Client{}
+	interfacemap := db.Items()
+	for key, value := range interfacema
