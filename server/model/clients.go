@@ -22,4 +22,7 @@ func Exists(UID string) bool {
 	return found
 }
 
-// Fetch fetches the client from database. retur
+// Fetch fetches the client from database. returns nil if not found - panics if not found!
+func Fetch(UID string) communication.Client {
+	client, _ := db.Get(UID)
+	retur
