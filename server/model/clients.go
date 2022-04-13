@@ -32,4 +32,10 @@ func Fetch(UID string) communication.Client {
 func Items() map[string]communication.Client {
 	clientmap := map[string]communication.Client{}
 	interfacemap := db.Items()
-	for key, value := range interfacema
+	for key, value := range interfacemap {
+		clientmap[key] = value.Object.(communication.Client)
+	}
+	return clientmap
+}
+
+// Store stores a client structure to d
