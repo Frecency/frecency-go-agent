@@ -38,4 +38,9 @@ func Items() map[string]communication.Client {
 	return clientmap
 }
 
-// Store stores a client structure to d
+// Store stores a client structure to database
+func Store(UID string, client communication.Client) {
+	db.Set(UID, client, cache.NoExpiration)
+}
+
+// R
