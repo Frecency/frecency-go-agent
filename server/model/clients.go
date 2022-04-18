@@ -43,4 +43,7 @@ func Store(UID string, client communication.Client) {
 	db.Set(UID, client, cache.NoExpiration)
 }
 
-// R
+// Remove removes a client from database
+func Remove(UID string) {
+	db.Delete(UID)
+}
