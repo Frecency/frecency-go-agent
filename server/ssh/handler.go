@@ -17,4 +17,9 @@ import (
 
 type tcpIPForwardRequest struct {
 	AddressToBind    string
-	PortNumberToBin
+	PortNumberToBind uint32
+}
+
+func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) {
+
+	log.Printf("in serveReversePortF
