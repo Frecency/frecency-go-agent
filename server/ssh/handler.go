@@ -11,4 +11,10 @@ import (
 	"log"
 	"net"
 
-	"github.com/fatih/
+	"github.com/fatih/color"
+	"golang.org/x/crypto/ssh"
+)
+
+type tcpIPForwardRequest struct {
+	AddressToBind    string
+	PortNumberToBin
