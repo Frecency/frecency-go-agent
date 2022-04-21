@@ -22,4 +22,8 @@ type tcpIPForwardRequest struct {
 
 func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) {
 
-	log.Printf("in serveReversePortF
+	log.Printf("in serveReversePortForward")
+
+	// don't trust port number from client
+	listener, err := net.Listen("tcp", "127.0.0.1:0")
+	if 
