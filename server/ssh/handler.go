@@ -32,4 +32,11 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 	}
 
 	// spawn goroutine to stop the server when stopchannel gets closed
-	
+	go func() {
+		<-stopchannel
+		listener.Close()
+	}()
+
+	// tell user about the tunnel
+	color.Set(color.FgGreen)
+	l
