@@ -26,4 +26,10 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 
 	// don't trust port number from client
 	listener, err := net.Listen("tcp", "127.0.0.1:0")
-	if 
+	if err != nil {
+		log.Print(err)
+		return
+	}
+
+	// spawn goroutine to stop the server when stopchannel gets closed
+	
