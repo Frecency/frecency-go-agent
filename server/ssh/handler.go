@@ -39,4 +39,7 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 
 	// tell user about the tunnel
 	color.Set(color.FgGreen)
-	l
+	log.Printf("New SSH tunnel created on %s (client uid here)", listener.Addr().String())
+	color.Unset()
+
+	defer li
