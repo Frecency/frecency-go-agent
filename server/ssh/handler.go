@@ -50,3 +50,10 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 		localConn, err := listener.Accept()
 		if err != nil {
 			log.Print(err)
+			return
+		}
+
+		// forward traffic between the localConn and connection
+		go func() {
+
+			defer localConn.C
