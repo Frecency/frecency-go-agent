@@ -42,4 +42,11 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 	log.Printf("New SSH tunnel created on %s (client uid here)", listener.Addr().String())
 	color.Unset()
 
-	defer li
+	defer listener.Close()
+
+	for {
+
+		// accept clients
+		localConn, err := listener.Accept()
+		if err != nil {
+			log.Print(err)
