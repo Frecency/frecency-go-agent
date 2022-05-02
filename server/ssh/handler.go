@@ -56,4 +56,9 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 		// forward traffic between the localConn and connection
 		go func() {
 
-			defer localConn.C
+			defer localConn.Close()
+			chDone := make(chan bool)
+
+			// Start connection -> remote data transfer
+			go func() {
+				_, err := io.
