@@ -61,4 +61,7 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 
 			// Start connection -> remote data transfer
 			go func() {
-				_, err := io.
+				_, err := io.Copy(connection, localConn)
+				if config.DEBUG {
+					if err != nil {
+						log.Println(fmt.Sprintf("error while copy remote->local: %s", er
