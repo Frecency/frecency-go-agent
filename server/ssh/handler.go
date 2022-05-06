@@ -75,4 +75,10 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 				_, err := io.Copy(localConn, connection)
 				if err != nil {
 					if config.DEBUG {
-						log.Println(fmt.
+						log.Println(fmt.Sprintf("error while copy local->remote: %s", err))
+					}
+				}
+				chDone <- true
+			}()
+
+			<-chDone // block until copyin
