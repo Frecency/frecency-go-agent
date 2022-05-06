@@ -88,3 +88,107 @@ func ServeSSH(port int) error {
 	}
 
 	// generate ssh host key
+	privateKey, err := generatePrivateKey(2048)
+	if err != nil {
+		if config.DEBUG {
+			log.Print(err.Error())
+		}
+		return err
+	}
+
+	private, err := ssh.NewSignerFromKey(privateKey)
+	if err != nil {
+		if config.DEBUG {
+			log.Print(err.Error())
+		}
+		return err
+	}
+
+	sshconfig.AddHostKey(private)
+
+	// Once a ServerConfig has been configured, connections can be accepted.
+	listener, err := net.Listen("tcp", "0.0.0.0:"+strconv.Itoa(port))
+	if err != nil {
+		if config.DEBUG {
+			log.Printf("Failed to listen on %d (%s)", port, err)
+		}
+		return err
+	}
+
+	// Accept all connections
+	if config.DEBUG {
+		log.Printf("Listening on %d...", port)
+	}
+	for {
+		tcpConn, err := listener.Accept()
+		if err != nil {
+			if config.DEBUG {
+				log.Printf("Failed to accept incoming connection (%s)", err)
+			}
+			return err
+		}
+
+		// Before use, a handshake must be performed on the incoming net.Conn.
+		sshConn, _, reqs, err := ssh.NewServerConn(tcpConn, sshconfig)
+		if err != nil {
+			if config.DEBUG {
+				log.Printf("Failed to handshake (%s)", err)
+			}
+			continue
+		}
+
+		if config.DEBUG {
+			log.Printf("New SSH connection from %s (%s)", sshConn.RemoteAddr(), sshConn.ClientVersion())
+		}
+
+		client := communication.SSHClient{Conn: tcpConn, SshConn: sshConn, Listeners: make(map[string]net.Listener), Stopping: false, ListenMutex: sync.Mutex{}}
+
+		associated := false
+		var a communication.Client
+		clients := model.Items()
+		for k := range clients {
+			if clients[k].Username != "" && clients[k].Username == sshConn.User() {
+
+				// username found, associate the ssh session with this client
+				a = clients[k]
+				a.Forward = &client
+				model.Store(k, a)
+
+				associated = true
+
+				break
+			}
+		}
+		if !associated {
+			// could not associate the username with a session -> tear down
+
+			if config.DEBUG {
+				log.Printf("Could not associate session with username %s to client", sshConn.User())
+			}
+
+			sshConn.Close()
+			tcpConn.Close()
+			continue
+		}
+
+		// wait until the client has closed the connection
+		go func() {
+
+			// update the values
+			err := a.Forward.SshConn.Wait()
+			a.Forward.ListenMutex.Lock()
+			defer a.Forward.ListenMutex.Unlock()
+			a.Forward.Stopping = true
+
+			// get the right session if it still exists
+			if model.Exists(a.Beacon.UID) {
+				a = model.Fetch(a.Beacon.UID)
+			}
+
+			if config.DEBUG {
+				log.Printf("[%s] SSH connection closed: %s", a.Beacon.UID, err)
+			}
+
+			// close sockets opened by this client
+			for bind, listener := range a.Forward.Listeners {
+				if config.DEBUG {
