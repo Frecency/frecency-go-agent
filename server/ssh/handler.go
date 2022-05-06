@@ -81,4 +81,7 @@ func serveReversePortForward(connection ssh.Channel, stopchannel chan struct{}) 
 				chDone <- true
 			}()
 
-			<-chDone // block until copyin
+			<-chDone // block until copying returns
+		}()
+	}
+}
