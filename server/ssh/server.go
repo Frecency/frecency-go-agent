@@ -448,3 +448,39 @@ func serve(cssh ssh.Channel, conn net.Conn, sessclient communication.Client, tim
 		}
 		once.Do(close)
 	}()
+}
+
+type timeoutFunc func()
+
+// Changed from pkg/io/io.go copyBuffer
+func copyTimeout(dst io.Writer, src io.Reader, timeout timeoutFunc) (written int64, err error) {
+	buf := make([]byte, 32*1024)
+
+	for {
+		nr, er := src.Read(buf)
+		if nr > 0 {
+			timeout()
+
+			nw, ew := dst.Write(buf[0:nr])
+			if nw > 0 {
+				written += int64(nw)
+			}
+			if ew != nil {
+				err = ew
+				break
+			}
+			if nr != nw {
+				err = io.ErrShortWrite
+				break
+			}
+			timeout()
+		}
+		if er != nil {
+			if er != io.EOF {
+				err = er
+			}
+			break
+		}
+	}
+	return written, err
+}
