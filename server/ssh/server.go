@@ -318,3 +318,133 @@ func handleTCPIPForward(sessclient communication.Client, req *ssh.Request) (net.
 	}
 
 	netarray := strings.Split(ln.Addr().String(), ":")
+	chosenport64, err := strconv.ParseUint(netarray[len(netarray)-1], 10, 64) // get the randomly chosen port as uint32
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+	chosenport32 := uint32(chosenport64)
+
+	log.Println(ln.Addr().String())
+
+	// Tell client everything is OK
+	reply := tcpIPForwardPayloadReply{chosenport32}
+	req.Reply(true, ssh.Marshal(&reply))
+
+	updatedbind := fmt.Sprintf("[%s]:%d", laddr, chosenport32)
+
+	return ln, &bindInfo{updatedbind, chosenport32, laddr}, nil
+
+}
+
+func handleTCPIPForwardCancel(sessclient communication.Client, req *ssh.Request) {
+
+	client := sessclient.Forward
+
+	if config.DEBUG {
+		log.Printf("[%s] \"cancel-tcpip-forward\" called by client", sessclient.Beacon.UID)
+	}
+	var payload tcpIPForwardCancelPayload
+	if err := ssh.Unmarshal(req.Payload, &payload); err != nil {
+		log.Printf("[%s] Unable to unmarshal cancel payload", sessclient.Beacon.UID)
+		req.Reply(false, []byte{})
+	}
+
+	bound := fmt.Sprintf("%s:%d", payload.Addr, payload.Port)
+
+	if listener, found := client.Listeners[bound]; found {
+		listener.Close()
+		delete(client.Listeners, bound)
+		req.Reply(true, []byte{})
+	}
+
+	req.Reply(false, []byte{})
+}
+
+// generatePrivateKey creates a RSA Private Key of specified byte size
+func generatePrivateKey(bitSize int) (*rsa.PrivateKey, error) {
+	// Private Key generation
+	privateKey, err := rsa.GenerateKey(rand.Reader, bitSize)
+	if err != nil {
+		return nil, err
+	}
+
+	// Validate Private Key
+	err = privateKey.Validate()
+	if err != nil {
+		return nil, err
+	}
+
+	return privateKey, nil
+}
+
+func handleForwardTCPIP(sessclient communication.Client, bindinfo *bindInfo, lconn net.Conn) {
+
+	client := sessclient.Forward
+
+	remotetcpaddr := lconn.RemoteAddr().(*net.TCPAddr)
+	raddr := remotetcpaddr.IP.String()
+	rport := uint32(remotetcpaddr.Port)
+
+	payload := forwardedTCPPayload{bindinfo.Addr, bindinfo.Port, raddr, uint32(rport)}
+	mpayload := ssh.Marshal(&payload)
+
+	// Open channel with client
+	c, requests, err := client.SshConn.OpenChannel("forwarded-tcpip", mpayload)
+	if err != nil {
+		log.Printf("[%s] Unable to get channel: %s. Hanging up requesting party!", sessclient.Beacon.UID, err)
+		lconn.Close()
+		return
+	}
+	if config.DEBUG {
+		log.Printf("[%s] Channel opened for client", sessclient.Beacon.UID)
+	}
+	go ssh.DiscardRequests(requests)
+
+	serve(c, lconn, sessclient, *forwardedtimeout)
+}
+
+func serve(cssh ssh.Channel, conn net.Conn, sessclient communication.Client, timeout time.Duration) {
+
+	client := sessclient.Forward
+
+	close := func() {
+		cssh.Close()
+		conn.Close()
+		if config.DEBUG {
+			log.Printf("[%s] Channel closed.", sessclient.Beacon.UID)
+		}
+	}
+
+	var once sync.Once
+	go func() {
+		//io.Copy(cssh, conn)
+		bytesWritten, err := copyTimeout(cssh, conn, func() {
+			conn.SetDeadline(time.Now().Add(timeout))
+			client.Conn.SetDeadline(time.Now().Add(*maintimeout))
+		})
+		if err != nil {
+			if config.DEBUG {
+				log.Printf("[%s] copyTimeout failed with: %s", sessclient.Beacon.UID, err)
+			}
+		}
+		if config.DEBUG {
+			log.Printf("[%s] Connection closed, bytes written: %d", sessclient.Beacon.UID, bytesWritten)
+		}
+		once.Do(close)
+	}()
+	go func() {
+		//io.Copy(conn, cssh)
+		bytesWritten, err := copyTimeout(conn, cssh, func() {
+			conn.SetDeadline(time.Now().Add(timeout))
+			client.Conn.SetDeadline(time.Now().Add(*maintimeout))
+		})
+		if err != nil {
+			if config.DEBUG {
+				log.Printf("[%s] copyTimeout failed with: %s", sessclient.Beacon.UID, err)
+			}
+		}
+		if config.DEBUG {
+			log.Printf("[%s] Connection closed, bytes written: %d", sessclient.Beacon.UID, bytesWritten)
+		}
+		once.Do(close)
+	}()
