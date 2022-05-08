@@ -14,4 +14,13 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"github.com/
+	"github.com/chzyer/readline"
+	"github.com/fatih/color"
+)
+
+// seed random
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+var lette
