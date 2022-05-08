@@ -23,4 +23,6 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-var lette
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func randStringRunes(n 
