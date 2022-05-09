@@ -30,4 +30,10 @@ func randStringRunes(n int) string {
 	for i := range b {
 		b[i] = letterRunes[rand.Intn(len(letterRunes))]
 	}
-	r
+	return string(b)
+}
+
+// colors
+var green = color.New(color.FgGreen)
+var yellow = color.New(color.FgYellow)
+var cyan = c
