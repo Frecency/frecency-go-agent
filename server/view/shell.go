@@ -36,4 +36,8 @@ func randStringRunes(n int) string {
 // colors
 var green = color.New(color.FgGreen)
 var yellow = color.New(color.FgYellow)
-var cyan = c
+var cyan = color.New(color.FgCyan)
+var red = color.New(color.FgRed)
+
+func printClientInfo(UID string) {
+	client := mod
