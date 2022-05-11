@@ -44,4 +44,6 @@ func printClientInfo(UID string) {
 	fmt.Printf("UID: %s\n", client.Beacon.UID)
 	fmt.Printf("CurrentUser: %s\n", client.Beacon.CurrentUser)
 	fmt.Printf("Hostname: %s\n", client.Beacon.Hostname)
-	fmt.Printf("OS: %s\n", client.Beacon.O
+	fmt.Printf("OS: %s\n", client.Beacon.OS)
+	fmt.Printf("Internal IPs: %s\n", client.Beacon.InternalIPS)
+	fmt.Printf("Commands in queue: %s\n", client.Com
