@@ -40,4 +40,6 @@ var cyan = color.New(color.FgCyan)
 var red = color.New(color.FgRed)
 
 func printClientInfo(UID string) {
-	client := mod
+	client := model.Fetch(UID) // fetch the user (if removed we're doomed!)
+	fmt.Printf("UID: %s\n", client.Beacon.UID)
+	fmt.Printf("CurrentUser: %s\n",
