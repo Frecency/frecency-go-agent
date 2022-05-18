@@ -48,4 +48,5 @@ func printClientInfo(UID string) {
 	fmt.Printf("Internal IPs: %s\n", client.Beacon.InternalIPS)
 	fmt.Printf("Commands in queue: %s\n", client.Commandqueue)
 	fmt.Printf("Sleeptime: %d seconds\n", client.Beacon.Sleeptime)
-	fmt.Printf("Last active: %s a
+	fmt.Printf("Last active: %s ago\n", time.Since(client.Lastactive).Truncate(time.Second))
+	if client.Username != "" && client.Password != ""
