@@ -49,4 +49,6 @@ func printClientInfo(UID string) {
 	fmt.Printf("Commands in queue: %s\n", client.Commandqueue)
 	fmt.Printf("Sleeptime: %d seconds\n", client.Beacon.Sleeptime)
 	fmt.Printf("Last active: %s ago\n", time.Since(client.Lastactive).Truncate(time.Second))
-	if client.Username != "" && client.Password != ""
+	if client.Username != "" && client.Password != "" && client.Forward != nil {
+		for _, listener := range client.Forward.Listeners {
+			fmt.Printf("Tunnel active.\n
