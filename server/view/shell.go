@@ -51,4 +51,6 @@ func printClientInfo(UID string) {
 	fmt.Printf("Last active: %s ago\n", time.Since(client.Lastactive).Truncate(time.Second))
 	if client.Username != "" && client.Password != "" && client.Forward != nil {
 		for _, listener := range client.Forward.Listeners {
-			fmt.Printf("Tunnel active.\n
+			fmt.Printf("Tunnel active.\n\tAddress: %s\n\tUsername: %s\n\tPassword: %s\n\n", listener.Addr(), client.Username, client.Password)
+		}
+	} else {
