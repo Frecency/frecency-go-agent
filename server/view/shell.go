@@ -54,3 +54,10 @@ func printClientInfo(UID string) {
 			fmt.Printf("Tunnel active.\n\tAddress: %s\n\tUsername: %s\n\tPassword: %s\n\n", listener.Addr(), client.Username, client.Password)
 		}
 	} else {
+		fmt.Printf("No tunnel active to this host\n\n")
+	}
+}
+
+// kill client
+func assignKill(UID string) {
+	fmt.Printf("Killing client 
