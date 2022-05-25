@@ -66,4 +66,9 @@ func assignKill(UID string) {
 	cyan.Print("Are you sure? y/n ")
 	var choice string
 	fmt.Scanf("%s", &choice)
-	if choi
+	if choice != "y" {
+		fmt.Println("Aborted killing client")
+		return
+	}
+
+	client := model.Fetch(UID) // fetch the
