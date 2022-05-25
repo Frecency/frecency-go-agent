@@ -60,4 +60,10 @@ func printClientInfo(UID string) {
 
 // kill client
 func assignKill(UID string) {
-	fmt.Printf("Killing client 
+	fmt.Printf("Killing client %s\n", UID)
+
+	// verify is this correct
+	cyan.Print("Are you sure? y/n ")
+	var choice string
+	fmt.Scanf("%s", &choice)
+	if choi
