@@ -77,4 +77,11 @@ func assignKill(UID string) {
 	client.Commandqueue = append(client.Commandqueue, comm)
 
 	model.Store(UID, client) // store the modified client
-	fmt.Println("Comm
+	fmt.Println("Command added to queue.")
+
+	printClientInfo(UID)
+}
+
+// remove client record
+func removeClient(UID string) {
+	
