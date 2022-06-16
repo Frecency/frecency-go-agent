@@ -74,4 +74,7 @@ func assignKill(UID string) {
 	client := model.Fetch(UID) // fetch the user (if removed we're doomed!)
 
 	comm := communication.Command{Command: communication.Quit, Args: nil}
-	client.Command
+	client.Commandqueue = append(client.Commandqueue, comm)
+
+	model.Store(UID, client) // store the modified client
+	fmt.Println("Comm
