@@ -84,4 +84,8 @@ func assignKill(UID string) {
 
 // remove client record
 func removeClient(UID string) {
-	
+	fmt.Printf("Removing client record %s\n", UID)
+
+	// verify is this correct
+	cyan.Print("Are you sure? y/n ")
+	var ch
