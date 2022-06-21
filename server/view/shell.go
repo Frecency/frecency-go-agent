@@ -95,4 +95,9 @@ func removeClient(UID string) {
 		return
 	}
 
-	// 
+	// remove the client record
+	model.Remove(UID)
+	fmt.Printf("Client record %s removed\n\n", UID)
+}
+
+// Set new sle
