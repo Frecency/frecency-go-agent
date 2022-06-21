@@ -88,4 +88,11 @@ func removeClient(UID string) {
 
 	// verify is this correct
 	cyan.Print("Are you sure? y/n ")
-	var ch
+	var choice string
+	fmt.Scanf("%s", &choice)
+	if choice != "y" {
+		fmt.Println("Aborted removing client record")
+		return
+	}
+
+	// 
