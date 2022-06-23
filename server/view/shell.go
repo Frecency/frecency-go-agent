@@ -100,4 +100,7 @@ func removeClient(UID string) {
 	fmt.Printf("Client record %s removed\n\n", UID)
 }
 
-// Set new sle
+// Set new sleeptime for client
+func setSleeptime(UID string) {
+
+	client := model.Fetch(UID) // fetch the user (if removed we're doo
