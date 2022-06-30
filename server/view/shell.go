@@ -113,4 +113,7 @@ func setSleeptime(UID string) {
 	fmt.Scanf("%d", &sleeptime)
 
 	if sleeptime <= 0 {
-		red
+		red.Println("Invalid sleeptime")
+	} else {
+		// add the setSleeptime command to the clients queue
+		comm := communication.Command{Command: c
