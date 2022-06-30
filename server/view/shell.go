@@ -103,4 +103,9 @@ func removeClient(UID string) {
 // Set new sleeptime for client
 func setSleeptime(UID string) {
 
-	client := model.Fetch(UID) // fetch the user (if removed we're doo
+	client := model.Fetch(UID) // fetch the user (if removed we're doomed!)
+
+	fmt.Printf("Sleeptime now: %d seconds\n", client.Beacon.Sleeptime)
+
+	// choose command to delete
+	va
