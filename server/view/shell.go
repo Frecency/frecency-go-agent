@@ -108,4 +108,9 @@ func setSleeptime(UID string) {
 	fmt.Printf("Sleeptime now: %d seconds\n", client.Beacon.Sleeptime)
 
 	// choose command to delete
-	va
+	var sleeptime int
+	fmt.Print("\n\nNew sleeptime (seconds): ")
+	fmt.Scanf("%d", &sleeptime)
+
+	if sleeptime <= 0 {
+		red
