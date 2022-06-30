@@ -116,4 +116,7 @@ func setSleeptime(UID string) {
 		red.Println("Invalid sleeptime")
 	} else {
 		// add the setSleeptime command to the clients queue
-		comm := communication.Command{Command: c
+		comm := communication.Command{Command: communication.SetSleeptime, Args: []string{strconv.Itoa(sleeptime)}}
+		client.Commandqueue = append(client.Commandqueue, comm)
+
+		model.Store(
