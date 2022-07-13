@@ -125,4 +125,6 @@ func setSleeptime(UID string) {
 	}
 }
 
-// remov
+// remove command from client's queue
+func removeCommand(UID string) {
+	client := model.Fetch(UID) // fetch the user (if removed we're d
