@@ -119,4 +119,10 @@ func setSleeptime(UID string) {
 		comm := communication.Command{Command: communication.SetSleeptime, Args: []string{strconv.Itoa(sleeptime)}}
 		client.Commandqueue = append(client.Commandqueue, comm)
 
-		model.Store(
+		model.Store(UID, client) // store the modified client
+		fmt.Println("Command added to queue.")
+		printClientInfo(UID)
+	}
+}
+
+// remov
