@@ -141,4 +141,7 @@ func removeCommand(UID string) {
 
 	if len(client.Commandqueue) <= commandtodelete {
 		// no such command
-		red.Println("
+		red.Println("Invalid command")
+	} else {
+		// remove the command at the given index
+		client.Commandqueue = a
