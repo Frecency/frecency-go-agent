@@ -136,4 +136,9 @@ func removeCommand(UID string) {
 
 	// choose command to delete
 	var commandtodelete int
-	fmt.Print("\n\nCommand to dele
+	fmt.Print("\n\nCommand to delete: ")
+	fmt.Scanf("%d", &commandtodelete)
+
+	if len(client.Commandqueue) <= commandtodelete {
+		// no such command
+		red.Println("
