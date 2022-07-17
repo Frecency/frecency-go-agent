@@ -131,4 +131,9 @@ func removeCommand(UID string) {
 
 	fmt.Println("Commands in queue:")
 	for i := 0; i < len(client.Commandqueue); i++ {
-		fmt.Printf("%d: %s",
+		fmt.Printf("%d: %s", i, client.Commandqueue[i])
+	}
+
+	// choose command to delete
+	var commandtodelete int
+	fmt.Print("\n\nCommand to dele
