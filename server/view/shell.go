@@ -127,4 +127,8 @@ func setSleeptime(UID string) {
 
 // remove command from client's queue
 func removeCommand(UID string) {
-	client := model.Fetch(UID) // fetch the user (if removed we're d
+	client := model.Fetch(UID) // fetch the user (if removed we're doomed!)
+
+	fmt.Println("Commands in queue:")
+	for i := 0; i < len(client.Commandqueue); i++ {
+		fmt.Printf("%d: %s",
