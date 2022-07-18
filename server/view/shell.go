@@ -146,4 +146,6 @@ func removeCommand(UID string) {
 		// remove the command at the given index
 		client.Commandqueue = append(client.Commandqueue[:commandtodelete], client.Commandqueue[commandtodelete+1:]...)
 
-		model.Sto
+		model.Store(UID, client) // store the modified client
+		fmt.Println("Command removed from queue.")
+		printClientInfo(UID
