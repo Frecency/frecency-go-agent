@@ -144,4 +144,6 @@ func removeCommand(UID string) {
 		red.Println("Invalid command")
 	} else {
 		// remove the command at the given index
-		client.Commandqueue = a
+		client.Commandqueue = append(client.Commandqueue[:commandtodelete], client.Commandqueue[commandtodelete+1:]...)
+
+		model.Sto
