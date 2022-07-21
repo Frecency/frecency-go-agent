@@ -148,4 +148,11 @@ func removeCommand(UID string) {
 
 		model.Store(UID, client) // store the modified client
 		fmt.Println("Command removed from queue.")
-		printClientInfo(UID
+		printClientInfo(UID)
+	}
+}
+
+// add command to start ssh to client with uid UID
+func assignQuickSSH(UID string) {
+
+	clien
