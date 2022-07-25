@@ -155,4 +155,7 @@ func removeCommand(UID string) {
 // add command to start ssh to client with uid UID
 func assignQuickSSH(UID string) {
 
-	clien
+	client := model.Fetch(UID) // fetch the user (if removed we're doomed!)
+
+	if client.Forward != nil {
+		fmt.Println("This client a
