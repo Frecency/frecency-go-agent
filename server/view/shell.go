@@ -158,4 +158,9 @@ func assignQuickSSH(UID string) {
 	client := model.Fetch(UID) // fetch the user (if removed we're doomed!)
 
 	if client.Forward != nil {
-		fmt.Println("This client a
+		fmt.Println("This client already has active tunnel open")
+		return
+	}
+
+	var localsshport = 0 // use first free port on host
+	var localsshusername strin
