@@ -167,4 +167,8 @@ func assignQuickSSH(UID string) {
 	var localsshpassword string
 	var remotesshusername string
 	var remotesshpassword string
-	var remotes
+	var remotesshHost string
+	var remotesshPort = config.SSHport
+	var fromPort = 0 // not used (first free port is used)
+
+	if 
