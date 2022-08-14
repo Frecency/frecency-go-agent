@@ -171,4 +171,6 @@ func assignQuickSSH(UID string) {
 	var remotesshPort = config.SSHport
 	var fromPort = 0 // not used (first free port is used)
 
-	if 
+	if client.Username == "" && client.Password == "" {
+		// generate credentials
+		client.Username = randStringR
