@@ -173,4 +173,10 @@ func assignQuickSSH(UID string) {
 
 	if client.Username == "" && client.Password == "" {
 		// generate credentials
-		client.Username = randStringR
+		client.Username = randStringRunes(10)
+		client.Password = randStringRunes(10)
+	}
+
+	localsshusername = client.Username
+	localsshpassword = client.Password
+	r
