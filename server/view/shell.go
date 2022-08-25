@@ -183,4 +183,9 @@ func assignQuickSSH(UID string) {
 	remotesshpassword = client.Password
 
 	fmt.Print("Remote SSH host: ")
-	fmt.Scanf("%s", &remot
+	fmt.Scanf("%s", &remotesshHost)
+
+	// verify info is correct
+	cyan.Print("Is everything correct? y/n ")
+	var choice string
+	fmt.Scanf("%s",
