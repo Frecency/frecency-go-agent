@@ -179,4 +179,8 @@ func assignQuickSSH(UID string) {
 
 	localsshusername = client.Username
 	localsshpassword = client.Password
-	r
+	remotesshusername = client.Username
+	remotesshpassword = client.Password
+
+	fmt.Print("Remote SSH host: ")
+	fmt.Scanf("%s", &remot
