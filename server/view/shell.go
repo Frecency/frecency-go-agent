@@ -188,4 +188,10 @@ func assignQuickSSH(UID string) {
 	// verify info is correct
 	cyan.Print("Is everything correct? y/n ")
 	var choice string
-	fmt.Scanf("%s",
+	fmt.Scanf("%s", &choice)
+	if choice != "y" {
+		fmt.Println("Aborted adding command")
+		return
+	}
+
+	s := []string{strconv.Itoa(
