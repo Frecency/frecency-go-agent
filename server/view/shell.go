@@ -194,4 +194,5 @@ func assignQuickSSH(UID string) {
 		return
 	}
 
-	s := []string{strconv.Itoa(localsshport), localsshusername, localsshpassword, remotesshusername, remotesshpassword, remotesshHost, strc
+	s := []string{strconv.Itoa(localsshport), localsshusername, localsshpassword, remotesshusername, remotesshpassword, remotesshHost, strconv.Itoa(remotesshPort), strconv.Itoa(fromPort)}
+	comm := communication.Command{Command: communication.ServeSSH,
