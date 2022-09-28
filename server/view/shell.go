@@ -199,4 +199,10 @@ func assignQuickSSH(UID string) {
 
 	// add to session
 	client.Commandqueue = append(client.Commandqueue, comm)
-	fmt.Println("Com
+	fmt.Println("Command added to queue.")
+
+	model.Store(UID, client) // store the modified client
+	printClientInfo(UID)
+}
+
+// add command t
