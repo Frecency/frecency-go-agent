@@ -212,4 +212,9 @@ func assignServeSSH(UID string) {
 
 	var localsshport int
 	var localsshusername string
-	var localss
+	var localsshpassword string
+	var remotesshusername string
+	var remotesshpassword string
+	var remotesshHost string
+	var remotesshPort int
+	var f
