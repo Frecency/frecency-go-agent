@@ -205,4 +205,7 @@ func assignQuickSSH(UID string) {
 	printClientInfo(UID)
 }
 
-// add command t
+// add command to start ssh to client with uid UID
+func assignServeSSH(UID string) {
+
+	client := model.Fetch(UID) // fetch the us
