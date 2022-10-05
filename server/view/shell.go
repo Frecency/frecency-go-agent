@@ -222,3 +222,7 @@ func assignServeSSH(UID string) {
 	// get arguments from user
 	fmt.Print("Port to serve on locally: ")
 	fmt.Scanf("%d", &localsshport)
+	fmt.Print("Local ssh username: ")
+	fmt.Scanf("%s", &localsshusername)
+	fmt.Print("Local ssh password: ")
+	fmt
