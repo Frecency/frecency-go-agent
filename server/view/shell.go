@@ -225,4 +225,6 @@ func assignServeSSH(UID string) {
 	fmt.Print("Local ssh username: ")
 	fmt.Scanf("%s", &localsshusername)
 	fmt.Print("Local ssh password: ")
-	fmt
+	fmt.Scanf("%s", &localsshpassword)
+	fmt.Print("Remote SSH username: ")
+	fmt.Scanf("%s", &remotess
