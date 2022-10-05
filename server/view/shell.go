@@ -217,4 +217,8 @@ func assignServeSSH(UID string) {
 	var remotesshpassword string
 	var remotesshHost string
 	var remotesshPort int
-	var f
+	var fromPort int
+
+	// get arguments from user
+	fmt.Print("Port to serve on locally: ")
+	fmt.Scanf("%d", &localsshport)
