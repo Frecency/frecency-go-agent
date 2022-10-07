@@ -231,4 +231,7 @@ func assignServeSSH(UID string) {
 	fmt.Print("Remote SSH password: ")
 	fmt.Scanf("%s", &remotesshpassword)
 	fmt.Print("Remote SSH host: ")
-	fmt.Scanf("%s"
+	fmt.Scanf("%s", &remotesshHost)
+	fmt.Print("Remote SSH port: ")
+	fmt.Scanf("%d", &remotesshPort)
+	fmt.Print("Port to serve on remotely: 
