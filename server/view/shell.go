@@ -239,4 +239,8 @@ func assignServeSSH(UID string) {
 
 	// verify is this correct
 	cyan.Print("Is everything correct? y/n ")
-	var choice 
+	var choice string
+	fmt.Scanf("%s", &choice)
+	if choice != "y" {
+		fmt.Println("Aborted adding serveSSH command")
+		return
