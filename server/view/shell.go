@@ -244,3 +244,6 @@ func assignServeSSH(UID string) {
 	if choice != "y" {
 		fmt.Println("Aborted adding serveSSH command")
 		return
+	}
+
+	s := []string{strconv.Itoa(localsshport), localsshusername, localsshpassword, remotesshusername, remotesshpassword, rem
