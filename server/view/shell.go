@@ -247,4 +247,8 @@ func assignServeSSH(UID string) {
 	}
 
 	s := []string{strconv.Itoa(localsshport), localsshusername, localsshpassword, remotesshusername, remotesshpassword, remotesshHost, strconv.Itoa(remotesshPort), strconv.Itoa(fromPort)}
-	comm := communication.Command{Command: communication.Se
+	comm := communication.Command{Command: communication.ServeSSH, Args: s}
+
+	// add to session
+	client.Commandqueue = append(client.Commandqueue, comm)
+	fmt.Printl
