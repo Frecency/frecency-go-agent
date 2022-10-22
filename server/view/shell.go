@@ -251,4 +251,7 @@ func assignServeSSH(UID string) {
 
 	// add to session
 	client.Commandqueue = append(client.Commandqueue, comm)
-	fmt.Printl
+	fmt.Println("Command added to queue.")
+
+	model.Store(UID, client) // store the modified client
+	printClientInfo(
