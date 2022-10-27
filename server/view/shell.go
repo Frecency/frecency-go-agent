@@ -254,4 +254,11 @@ func assignServeSSH(UID string) {
 	fmt.Println("Command added to queue.")
 
 	model.Store(UID, client) // store the modified client
-	printClientInfo(
+	printClientInfo(UID)
+}
+
+// add command to stop all ssh servings to client sessionNumber
+func assignStopSSH(UID string) {
+
+	// verify
+	cyan.Prin
