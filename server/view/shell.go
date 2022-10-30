@@ -263,4 +263,10 @@ func assignStopSSH(UID string) {
 	// verify
 	cyan.Print("Do you really want to stop any ssh servers and reverse port forwards running on the client? y/n ")
 	var choice string
-	fmt
+	fmt.Scanf("%s", &choice)
+	if choice != "y" {
+		fmt.Println("Aborted stopping stopping ssh servers command")
+		return
+	}
+
+	client := model.Fetch(UI
