@@ -261,4 +261,6 @@ func assignServeSSH(UID string) {
 func assignStopSSH(UID string) {
 
 	// verify
-	cyan.Prin
+	cyan.Print("Do you really want to stop any ssh servers and reverse port forwards running on the client? y/n ")
+	var choice string
+	fmt
