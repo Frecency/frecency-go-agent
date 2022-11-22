@@ -271,4 +271,7 @@ func assignStopSSH(UID string) {
 
 	client := model.Fetch(UID) // fetch the user (if removed we're doomed!)
 
-	comm := communication.Command{Command: communication.St
+	comm := communication.Command{Command: communication.StopSSH, Args: nil}
+	client.Commandqueue = append(client.Commandqueue, comm)
+
+	// remove username and pa
