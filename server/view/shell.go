@@ -278,4 +278,11 @@ func assignStopSSH(UID string) {
 	client.Username = ""
 	client.Password = ""
 
-	model.Store(UID, client) // store the modifi
+	model.Store(UID, client) // store the modified client
+	fmt.Println("Command added to queue.")
+
+	printClientInfo(UID)
+}
+
+////////////////////////////////////////
+// new UI f
