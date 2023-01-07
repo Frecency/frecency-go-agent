@@ -285,4 +285,8 @@ func assignStopSSH(UID string) {
 }
 
 ////////////////////////////////////////
-// new UI f
+// new UI functions below
+
+func mainusage(w io.Writer) {
+	io.WriteString(w, "commands:\n")
+	io.WriteString(w, maincompleter.Tree("    "))
