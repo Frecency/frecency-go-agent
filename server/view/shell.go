@@ -306,4 +306,10 @@ func listUIDs() func(string) []string {
 var maincompleter = readline.NewPrefixCompleter(
 	readline.PcItem("sessions"),
 	readline.PcItem("interact",
-		readline.PcIte
+		readline.PcItemDynamic(
+			listUIDs(),
+		),
+	),
+	readline.PcItem("forwards"),
+	readline.PcItem("help"),
+	read
