@@ -312,4 +312,10 @@ var maincompleter = readline.NewPrefixCompleter(
 	),
 	readline.PcItem("forwards"),
 	readline.PcItem("help"),
-	read
+	readline.PcItem("exit"),
+)
+
+var interactcompleter = readline.NewPrefixCompleter(
+	readline.PcItem("info"),
+	readline.PcItem("quickSSH"),
+	readl
