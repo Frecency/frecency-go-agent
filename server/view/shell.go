@@ -290,3 +290,8 @@ func assignStopSSH(UID string) {
 func mainusage(w io.Writer) {
 	io.WriteString(w, "commands:\n")
 	io.WriteString(w, maincompleter.Tree("    "))
+}
+
+func listUIDs() func(string) []string {
+	return func(line string) []string {
+		names := make([]string, 0
