@@ -303,4 +303,7 @@ func listUIDs() func(string) []string {
 	}
 }
 
-var mainco
+var maincompleter = readline.NewPrefixCompleter(
+	readline.PcItem("sessions"),
+	readline.PcItem("interact",
+		readline.PcIte
