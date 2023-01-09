@@ -294,4 +294,13 @@ func mainusage(w io.Writer) {
 
 func listUIDs() func(string) []string {
 	return func(line string) []string {
-		names := make([]string, 0
+		names := make([]string, 0)
+		clientmap := model.Items()
+		for key := range clientmap {
+			names = append(names, key)
+		}
+		return names
+	}
+}
+
+var mainco
