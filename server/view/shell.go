@@ -318,4 +318,8 @@ var maincompleter = readline.NewPrefixCompleter(
 var interactcompleter = readline.NewPrefixCompleter(
 	readline.PcItem("info"),
 	readline.PcItem("quickSSH"),
-	readl
+	readline.PcItem("serveSSH"),
+	readline.PcItem("stopSSH"),
+	readline.PcItem("remove",
+		readline.PcItem("command"),
+		readlin
