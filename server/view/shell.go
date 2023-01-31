@@ -322,4 +322,7 @@ var interactcompleter = readline.NewPrefixCompleter(
 	readline.PcItem("stopSSH"),
 	readline.PcItem("remove",
 		readline.PcItem("command"),
-		readlin
+		readline.PcItem("client")),
+	readline.PcItem("set", readline.PcItem("sleeptime")),
+	readline.PcItem("kill"),
+	readline.PcItem("
