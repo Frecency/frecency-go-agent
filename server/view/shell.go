@@ -325,4 +325,9 @@ var interactcompleter = readline.NewPrefixCompleter(
 		readline.PcItem("client")),
 	readline.PcItem("set", readline.PcItem("sleeptime")),
 	readline.PcItem("kill"),
-	readline.PcItem("
+	readline.PcItem("help"),
+	readline.PcItem("back"),
+)
+
+func interactusage(w io.Writer) {
+	io.WriteString(w, "commands:
