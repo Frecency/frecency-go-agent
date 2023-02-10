@@ -330,4 +330,9 @@ var interactcompleter = readline.NewPrefixCompleter(
 )
 
 func interactusage(w io.Writer) {
-	io.WriteString(w, "commands:
+	io.WriteString(w, "commands:\n")
+	io.WriteString(w, interactcompleter.Tree("    "))
+}
+
+func filterInput(r rune) (rune, bool) {
+	switch 
