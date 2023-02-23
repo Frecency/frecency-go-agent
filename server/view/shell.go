@@ -335,4 +335,12 @@ func interactusage(w io.Writer) {
 }
 
 func filterInput(r rune) (rune, bool) {
-	switch 
+	switch r {
+	// block CtrlZ feature
+	case readline.CharCtrlZ:
+		return r, false
+	}
+	return r, true
+}
+
+// Shell - ma
