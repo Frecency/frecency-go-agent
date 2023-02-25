@@ -343,4 +343,7 @@ func filterInput(r rune) (rune, bool) {
 	return r, true
 }
 
-// Shell - ma
+// Shell - main command shell for user
+func Shell() {
+	l, err := readline.NewEx(&readline.Config{
+		Prompt:          yellow.Sprint
