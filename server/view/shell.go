@@ -346,4 +346,8 @@ func filterInput(r rune) (rune, bool) {
 // Shell - main command shell for user
 func Shell() {
 	l, err := readline.NewEx(&readline.Config{
-		Prompt:          yellow.Sprint
+		Prompt:          yellow.Sprintf("> "),
+		HistoryFile:     "/tmp/readline.tmp",
+		AutoComplete:    maincompleter,
+		InterruptPrompt: "^C",
+		EOFPrompt:    
