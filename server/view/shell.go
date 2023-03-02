@@ -350,4 +350,12 @@ func Shell() {
 		HistoryFile:     "/tmp/readline.tmp",
 		AutoComplete:    maincompleter,
 		InterruptPrompt: "^C",
-		EOFPrompt:    
+		EOFPrompt:       "exit",
+
+		HistorySearchFold:   true,
+		FuncFilterInputRune: filterInput,
+	})
+	if err != nil {
+		panic(err)
+	}
+	defer l.C
