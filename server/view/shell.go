@@ -358,4 +358,11 @@ func Shell() {
 	if err != nil {
 		panic(err)
 	}
-	defer l.C
+	defer l.Close()
+
+	log.SetOutput(l.Stderr())
+	for {
+		line, err := l.Readline()
+		if err == readline.ErrInterrupt {
+			if len(line) == 0 {
+			
