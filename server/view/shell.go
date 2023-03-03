@@ -374,4 +374,9 @@ func Shell() {
 		}
 
 		line = strings.TrimSpace(line)
-	
+		switch {
+
+		case line == "sessions":
+			clientmap := model.Items()
+			if len(clientmap) <= 0 {
+				fmt.Println(
