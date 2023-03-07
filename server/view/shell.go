@@ -382,4 +382,6 @@ func Shell() {
 				fmt.Println("No available sessions!")
 			} else {
 				fmt.Println("Available sessions:")
-				w := new(tabwriter.W
+				w := new(tabwriter.Writer)
+				w.Init(os.Stdout, 0, 8, 2, '\t', tabwriter.Debug|tabwriter.AlignRight)
+				fmt.Fprintln(w, "UID\tCurrent user\tHo
