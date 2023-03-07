@@ -379,4 +379,7 @@ func Shell() {
 		case line == "sessions":
 			clientmap := model.Items()
 			if len(clientmap) <= 0 {
-				fmt.Println(
+				fmt.Println("No available sessions!")
+			} else {
+				fmt.Println("Available sessions:")
+				w := new(tabwriter.W
