@@ -386,4 +386,10 @@ func Shell() {
 				w.Init(os.Stdout, 0, 8, 2, '\t', tabwriter.Debug|tabwriter.AlignRight)
 				fmt.Fprintln(w, "UID\tCurrent user\tHostname\tSleeptime\tLast active\t")
 				for key, value := range clientmap {
-					fmt.Fprintf(w, "%s\t%s\t%s\t%ds\t%s ago\t\n", key, value.Beacon.CurrentUser, value.Beacon.Hostname, value.Beacon.Sleeptime, time.Since(value.Lastactive).
+					fmt.Fprintf(w, "%s\t%s\t%s\t%ds\t%s ago\t\n", key, value.Beacon.CurrentUser, value.Beacon.Hostname, value.Beacon.Sleeptime, time.Since(value.Lastactive).Truncate(time.Second))
+				}
+				fmt.Fprintln(w)
+				w.Flush()
+			}
+		case line == "forwards":
+			clientmap := model.Ite
