@@ -384,4 +384,6 @@ func Shell() {
 				fmt.Println("Available sessions:")
 				w := new(tabwriter.Writer)
 				w.Init(os.Stdout, 0, 8, 2, '\t', tabwriter.Debug|tabwriter.AlignRight)
-				fmt.Fprintln(w, "UID\tCurrent user\tHo
+				fmt.Fprintln(w, "UID\tCurrent user\tHostname\tSleeptime\tLast active\t")
+				for key, value := range clientmap {
+					fmt.Fprintf(w, "%s\t%s\t%s\t%ds\t%s ago\
