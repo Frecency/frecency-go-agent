@@ -392,4 +392,8 @@ func Shell() {
 				w.Flush()
 			}
 		case line == "forwards":
-			clientmap := model.Ite
+			clientmap := model.Items()
+			if len(clientmap) <= 0 {
+				fmt.Println("No available sessions!")
+			} else {
+				fmt.Println("Ac
