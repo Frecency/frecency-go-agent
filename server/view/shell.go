@@ -401,4 +401,6 @@ func Shell() {
 				w.Init(os.Stdout, 0, 8, 2, '\t', tabwriter.Debug|tabwriter.AlignRight)
 				fmt.Fprintln(w, "UID\tAddress\tUsername\tPassword\t")
 				for key, value := range clientmap {
-					if value.
+					if value.Forward != nil {
+						for _, listener := range value.Forward.Listeners {
+							fmt.Fprintf(w, "%s\t%s\t%s\t%s\t\n", key, 
