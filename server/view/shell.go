@@ -403,4 +403,11 @@ func Shell() {
 				for key, value := range clientmap {
 					if value.Forward != nil {
 						for _, listener := range value.Forward.Listeners {
-							fmt.Fprintf(w, "%s\t%s\t%s\t%s\t\n", key, 
+							fmt.Fprintf(w, "%s\t%s\t%s\t%s\t\n", key, listener.Addr(), value.Username, value.Password)
+						}
+					}
+				}
+				fmt.Fprintln(w)
+				w.Flush()
+			}
+		case s
