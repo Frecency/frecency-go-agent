@@ -412,4 +412,9 @@ func Shell() {
 			}
 		case strings.HasPrefix(line, "interact "): // TODO: doesnt work as there is no id
 			if model.Exists(line[9:]) {
-				int
+				interact(line[9:])
+			} else {
+				fmt.Println("No such session!")
+			}
+		case line == "help":
+			fmt.Println(
