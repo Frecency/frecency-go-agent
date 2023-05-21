@@ -417,4 +417,6 @@ func Shell() {
 				fmt.Println("No such session!")
 			}
 		case line == "help":
-			fmt.Println(
+			fmt.Println("Available commands:")
+			fmt.Println("sessions\t\t\tlist available sessions")
+			fmt.Println("he
