@@ -419,4 +419,6 @@ func Shell() {
 		case line == "help":
 			fmt.Println("Available commands:")
 			fmt.Println("sessions\t\t\tlist available sessions")
-			fmt.Println("he
+			fmt.Println("help\t\t\t\tprint this help message")
+			fmt.Println("exit\t\t\t\texit program")
+			fmt.Println("interact <UID>
