@@ -421,4 +421,7 @@ func Shell() {
 			fmt.Println("sessions\t\t\tlist available sessions")
 			fmt.Println("help\t\t\t\tprint this help message")
 			fmt.Println("exit\t\t\t\texit program")
-			fmt.Println("interact <UID>
+			fmt.Println("interact <UID>\t\t\tinteract with session <UID>")
+			fmt.Println("forwards\t\t\tlist active port forwards")
+			//mainusage(l.Stderr())
+		
