@@ -424,4 +424,8 @@ func Shell() {
 			fmt.Println("interact <UID>\t\t\tinteract with session <UID>")
 			fmt.Println("forwards\t\t\tlist active port forwards")
 			//mainusage(l.Stderr())
-		
+		case line == "exit":
+			goto exit
+		case line == "":
+		default:
+			log.Println("Invalid command. Type 'help' for hel
