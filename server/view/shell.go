@@ -437,4 +437,7 @@ exit:
 func interact(UID string) {
 
 	l, err := readline.NewEx(&readline.Config{
-		Prompt:          yell
+		Prompt:          yellow.Sprintf("/interact/%s> ", UID),
+		HistoryFile:     "/tmp/interact.tmp",
+		AutoComplete:    interactcompleter,
+		Inte
