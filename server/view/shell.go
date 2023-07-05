@@ -428,4 +428,13 @@ func Shell() {
 			goto exit
 		case line == "":
 		default:
-			log.Println("Invalid command. Type 'help' for hel
+			log.Println("Invalid command. Type 'help' for help")
+		}
+	}
+exit:
+}
+
+func interact(UID string) {
+
+	l, err := readline.NewEx(&readline.Config{
+		Prompt:          yell
