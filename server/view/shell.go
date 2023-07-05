@@ -440,4 +440,10 @@ func interact(UID string) {
 		Prompt:          yellow.Sprintf("/interact/%s> ", UID),
 		HistoryFile:     "/tmp/interact.tmp",
 		AutoComplete:    interactcompleter,
-		Inte
+		InterruptPrompt: "^C",
+		EOFPrompt:       "exit",
+
+		HistorySearchFold:   true,
+		FuncFilterInputRune: filterInput,
+	})
+	if 
