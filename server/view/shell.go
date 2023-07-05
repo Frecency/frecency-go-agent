@@ -446,4 +446,12 @@ func interact(UID string) {
 		HistorySearchFold:   true,
 		FuncFilterInputRune: filterInput,
 	})
-	if 
+	if err != nil {
+		panic(err)
+	}
+	defer l.Close()
+	log.SetOutput(l.Stderr())
+
+	for {
+		line, err := l.Readline()
+		if
