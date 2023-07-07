@@ -454,4 +454,10 @@ func interact(UID string) {
 
 	for {
 		line, err := l.Readline()
-		if
+		if err == readline.ErrInterrupt {
+			if len(line) == 0 {
+				break
+			} else {
+				continue
+			}
+		} else if err == io.EOF
