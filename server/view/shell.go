@@ -460,4 +460,12 @@ func interact(UID string) {
 			} else {
 				continue
 			}
-		} else if err == io.EOF
+		} else if err == io.EOF {
+			break
+		}
+
+		line = strings.TrimSpace(line)
+		switch {
+		case line == "info":
+			printClientInfo(UID)
+		case line == "quickSS
