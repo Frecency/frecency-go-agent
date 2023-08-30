@@ -479,4 +479,9 @@ func interact(UID string) {
 			case "client":
 				removeClient(UID)
 				return
-			ca
+			case "command":
+				removeCommand(UID)
+			default:
+				println("Invalid command. Type 'help' for help")
+			}
+		
