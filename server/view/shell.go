@@ -468,4 +468,10 @@ func interact(UID string) {
 		switch {
 		case line == "info":
 			printClientInfo(UID)
-		case line == "quickSS
+		case line == "quickSSH":
+			assignQuickSSH(UID)
+		case line == "serveSSH":
+			assignServeSSH(UID)
+		case line == "stopSSH":
+			assignStopSSH(UID)
+		cas
