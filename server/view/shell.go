@@ -474,4 +474,9 @@ func interact(UID string) {
 			assignServeSSH(UID)
 		case line == "stopSSH":
 			assignStopSSH(UID)
-		cas
+		case strings.HasPrefix(line, "remove "):
+			switch line[7:] {
+			case "client":
+				removeClient(UID)
+				return
+			ca
