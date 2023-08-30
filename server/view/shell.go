@@ -484,4 +484,9 @@ func interact(UID string) {
 			default:
 				println("Invalid command. Type 'help' for help")
 			}
-		
+		case strings.HasPrefix(line, "set "):
+			switch line[4:] {
+			case "sleeptime":
+				setSleeptime(UID)
+			default:
+				println("In
