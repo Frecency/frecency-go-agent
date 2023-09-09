@@ -489,4 +489,9 @@ func interact(UID string) {
 			case "sleeptime":
 				setSleeptime(UID)
 			default:
-				println("In
+				println("Invalid command. Type 'help' for help")
+			}
+		case line == "kill":
+			assignKill(UID)
+		case line == "back":
+			re
