@@ -494,4 +494,8 @@ func interact(UID string) {
 		case line == "kill":
 			assignKill(UID)
 		case line == "back":
-			re
+			return
+		case line == "help":
+			fmt.Println("Available commands:")
+			fmt.Println("info\t\t\t\tprint client info")
+			fmt.Pri
