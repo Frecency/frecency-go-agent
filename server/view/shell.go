@@ -502,4 +502,5 @@ func interact(UID string) {
 			fmt.Println("serveSSH\t\t\tcreate reverse SSH tunnel and serve SSHD for other hosts")
 			fmt.Println("stopSSH\t\t\t\tstop all ssh sessions running on client")
 			fmt.Println("remove command\t\t\tremove command from queue")
-			fmt.Println("remove client\t\t\tremove th
+			fmt.Println("remove client\t\t\tremove this client record (does not interact with the client)")
+			fmt.Println("set sleeptime\t\t\tset new sleeptime
