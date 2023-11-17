@@ -503,4 +503,7 @@ func interact(UID string) {
 			fmt.Println("stopSSH\t\t\t\tstop all ssh sessions running on client")
 			fmt.Println("remove command\t\t\tremove command from queue")
 			fmt.Println("remove client\t\t\tremove this client record (does not interact with the client)")
-			fmt.Println("set sleeptime\t\t\tset new sleeptime
+			fmt.Println("set sleeptime\t\t\tset new sleeptime for client")
+			fmt.Println("kill\t\t\t\tkill the client")
+			fmt.Println("help\t\t\t\tprint this help message")
+		
