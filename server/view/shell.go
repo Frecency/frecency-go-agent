@@ -506,4 +506,7 @@ func interact(UID string) {
 			fmt.Println("set sleeptime\t\t\tset new sleeptime for client")
 			fmt.Println("kill\t\t\t\tkill the client")
 			fmt.Println("help\t\t\t\tprint this help message")
-		
+			fmt.Println("back\t\t\t\treturn to main menu")
+			//interactusage(l.Stderr())
+		case line == "":
+		defaul
