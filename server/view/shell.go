@@ -509,4 +509,8 @@ func interact(UID string) {
 			fmt.Println("back\t\t\t\treturn to main menu")
 			//interactusage(l.Stderr())
 		case line == "":
-		defaul
+		default:
+			println("Invalid command. Type 'help' for help")
+		}
+	}
+}
